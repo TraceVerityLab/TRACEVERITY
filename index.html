@@ -2,615 +2,1276 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <title>TRACEVERITY</title>
 
 <style>
-:root {
-  --bg:#07111f;
-  --panel:#0d1a2b;
-  --line:#29415b;
-  --cyan:#16c7dc;
-  --text:#e8eef7;
-  --muted:#8ea0b4;
 
-  --green:#38c172;
-  --yellow:#f4c542;
-  --orange:#f39c4a;
-  --grey:#7f8c8d;
-  --red:#e45d65;
+:root{
+  --bg:#06111f;
+  --panel:#0b1a2b;
+  --panel2:#0e2034;
+  --line:#29445f;
+
+  --cyan:#14c8e2;
+  --blue:#289cff;
+  --green:#41d58a;
+  --yellow:#f5c744;
+  --orange:#f49a3f;
+  --purple:#a771ff;
+  --red:#ef5565;
+
+  --text:#edf4fc;
+  --muted:#8799ac;
 }
 
-* {
+*{
   box-sizing:border-box;
 }
 
-html,body {
+html,body{
   margin:0;
+  padding:0;
   background:var(--bg);
   color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:Arial,Tahoma,sans-serif;
 }
 
-body {
+body{
   min-height:100vh;
+  padding-bottom:92px;
+}
+
+button,input{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
 }
 
 /* HEADER */
 
-header {
+.header{
   position:sticky;
   top:0;
-  z-index:30;
-  background:#07111ff2;
-  border-bottom:1px solid #22344a;
-  padding:12px 14px;
+  z-index:100;
+
+  background:rgba(6,17,31,.96);
+  backdrop-filter:blur(12px);
+
+  border-bottom:1px solid #20364c;
+
+  padding:
+  calc(12px + env(safe-area-inset-top))
+  14px
+  12px;
+}
+
+.header-top{
   display:flex;
+  align-items:center;
+  justify-content:space-between;
   gap:10px;
-  align-items:center;
 }
 
-.brand {
-  font-weight:800;
-  letter-spacing:2px;
-  white-space:nowrap;
+.brand{
+  direction:ltr;
+  font-size:23px;
+  font-weight:900;
+  letter-spacing:3px;
 }
 
-.cyan {
+.brand span{
   color:var(--cyan);
 }
 
-.top-actions {
-  margin-inline-start:auto;
+.language-row{
   display:flex;
-  gap:7px;
   align-items:center;
+  gap:5px;
+  direction:ltr;
 }
 
-button,input {
-  font:inherit;
+.lang-btn{
+  height:39px;
+  min-width:45px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+
+  border:1px solid #304e69;
+  background:#091726;
+
+  border-radius:10px;
+  color:white;
+
+  padding:4px 7px;
 }
 
-button {
-  background:#0d1a2b;
-  color:var(--text);
-  border:1px solid #35516e;
-  border-radius:9px;
-  padding:8px 10px;
-  cursor:pointer;
-}
-
-button.active {
+.lang-btn.active{
   border-color:var(--cyan);
-  color:var(--cyan);
+  box-shadow:0 0 12px rgba(20,200,226,.18);
+}
+
+.lang-btn img{
+  width:27px;
+  height:18px;
+  object-fit:cover;
+  border-radius:3px;
+}
+
+.flag{
+  font-size:20px;
+}
+
+.intro{
+  margin-top:9px;
+
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
 }
 
 /* SEARCH */
 
-.search-wrap {
-  padding:10px 14px;
-  border-bottom:1px solid #1e3044;
-  background:#091522;
+.search-area{
+  padding:11px 13px 4px;
 }
 
-#search {
+.search{
+  height:47px;
+
+  display:flex;
+  align-items:center;
+  gap:9px;
+
+  padding:0 13px;
+
+  border:1px solid #284963;
+  border-radius:13px;
+
+  background:#081724;
+}
+
+.search span{
+  font-size:20px;
+  color:var(--cyan);
+}
+
+.search input{
   width:100%;
-  padding:10px 12px;
-  border-radius:10px;
-  border:1px solid #304b66;
-  background:#07111f;
-  color:var(--text);
+
+  border:0;
+  outline:0;
+
+  background:transparent;
+  color:white;
+
+  font-size:14px;
 }
 
-/* MAIN */
+/* QUICK CONTROLS */
 
-.layout {
+.quick-controls{
   display:grid;
-  grid-template-columns:240px 1fr 280px;
-  gap:12px;
-  padding:12px;
+  grid-template-columns:1fr 1fr;
+
+  gap:8px;
+  padding:7px 13px;
 }
 
-.sidebar,
-.details {
+.quick-btn{
+  border:1px solid #2d4c68;
+  border-radius:12px;
+
+  background:#0b1b2c;
+  color:white;
+
+  padding:11px;
+
+  font-size:13px;
+}
+
+.quick-btn span{
+  color:var(--cyan);
+}
+
+/* STATISTICS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+
+  gap:8px;
+  padding:8px 13px 13px;
+}
+
+.stat{
+  min-height:87px;
+
+  background:
+  linear-gradient(
+    180deg,
+    #0e2034,
+    #091827
+  );
+
+  border:1px solid #27455f;
+  border-radius:13px;
+
+  padding:10px 7px;
+
+  text-align:center;
+}
+
+.stat-icon{
+  font-size:23px;
+  margin-bottom:4px;
+}
+
+.stat-number{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:4px;
+}
+
+.cyan{color:var(--cyan)}
+.green{color:var(--green)}
+.yellow{color:var(--yellow)}
+.purple{color:var(--purple)}
+.orange{color:var(--orange)}
+.blue{color:var(--blue)}
+
+/* MAIN PAGES */
+
+.page{
+  display:none;
+  padding:0 13px 20px;
+}
+
+.page.active{
+  display:block;
+}
+
+/* NETWORK INTRO */
+
+.section{
+  background:var(--panel);
+
+  border:1px solid #294860;
+  border-radius:16px;
+
+  padding:14px;
+
+  margin-bottom:12px;
+}
+
+.section-title{
+  font-size:17px;
+  font-weight:bold;
+
+  margin-bottom:5px;
+}
+
+.section-subtitle{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.6;
+}
+
+/* CENTRAL NETWORK */
+
+.network{
+  margin-top:14px;
+
   display:flex;
   flex-direction:column;
+  align-items:center;
+}
+
+.center-node{
+  width:165px;
+  height:165px;
+
+  border-radius:50%;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
+
+  border:2px solid var(--cyan);
+
+  background:
+  radial-gradient(
+    circle,
+    #0d2b43,
+    #071421 70%
+  );
+
+  box-shadow:
+  0 0 25px rgba(20,200,226,.22);
+}
+
+.center-node strong{
+  font-size:17px;
+}
+
+.center-node small{
+  color:var(--muted);
+  margin-top:6px;
+}
+
+/* NODES */
+
+.nodes{
+  width:100%;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  gap:9px;
+
+  margin-top:15px;
+}
+
+.node{
+  min-height:118px;
+
+  background:#091a2b;
+
+  border:1px solid #2c4d68;
+  border-radius:14px;
+
+  padding:12px;
+
+  position:relative;
+
+  transition:.15s;
+}
+
+.node:active{
+  transform:scale(.98);
+}
+
+.node-icon{
+  font-size:26px;
+  margin-bottom:7px;
+}
+
+.node-title{
+  font-size:14px;
+  font-weight:bold;
+}
+
+.node-desc{
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.55;
+  margin-top:5px;
+}
+
+.node-status{
+  display:inline-block;
+
+  margin-top:7px;
+
+  padding:3px 7px;
+
+  border-radius:20px;
+
+  border:1px solid #33516b;
+
+  font-size:9px;
+}
+
+.node.purple{
+  border-color:#67458c;
+}
+
+.node.green{
+  border-color:#28694e;
+}
+
+.node.red{
+  border-color:#713b44;
+}
+
+.node.blue{
+  border-color:#275a88;
+}
+
+.node.yellow{
+  border-color:#745e28;
+}
+
+.node.cyan-border{
+  border-color:#237384;
+}
+
+/* RELATION LEGEND */
+
+.legend{
+  margin-top:13px;
+
+  padding:10px;
+
+  background:#081725;
+
+  border:1px solid #27435b;
+  border-radius:11px;
+}
+
+.legend-title{
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+
+.legend-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  gap:7px;
+
+  font-size:9px;
+}
+
+.legend-line{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.line{
+  width:26px;
+  height:2px;
+}
+
+.line.green{background:var(--green)}
+.line.blue{background:var(--blue)}
+.line.yellow{background:var(--yellow)}
+
+.line.dashed{
+  border-top:2px dashed var(--red);
+}
+
+/* COUNTRY CARDS */
+
+.country-list{
+  margin-top:12px;
+}
+
+.country-card{
+  display:flex;
+  align-items:center;
+  gap:11px;
+
+  padding:12px;
+
+  margin-bottom:9px;
+
+  background:#0a1929;
+
+  border:1px solid #28465f;
+  border-radius:13px;
+}
+
+.country-flag{
+  font-size:30px;
+}
+
+.country-info{
+  flex:1;
+}
+
+.country-name{
+  font-size:15px;
+  font-weight:bold;
+}
+
+.country-meta{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:4px;
+}
+
+.progress{
+  width:45px;
+  height:45px;
+
+  border-radius:50%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  border:4px solid var(--green);
+
+  font-size:10px;
+}
+
+.progress.yellow{
+  border-color:var(--yellow);
+}
+
+.progress.orange{
+  border-color:var(--orange);
+}
+
+.progress.red{
+  border-color:var(--red);
+}
+
+/* COUNTRY DETAIL */
+
+.country-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  font-size:23px;
+  font-weight:bold;
+
+  margin-bottom:12px;
+}
+
+.country-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+
+  gap:9px;
+}
+
+.country-item{
+  min-height:95px;
+
+  padding:11px;
+
+  background:#0a1929;
+
+  border:1px solid #284760;
+  border-radius:13px;
+
+  text-align:center;
+}
+
+.country-item-icon{
+  font-size:24px;
+}
+
+.country-item-number{
+  margin-top:5px;
+
+  font-size:19px;
+  font-weight:bold;
+}
+
+.country-item-label{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:4px;
+}
+
+/* MOSQUE LIST */
+
+.filter-row{
+  display:flex;
+  gap:7px;
+  margin-bottom:10px;
+}
+
+.filter-row button{
+  flex:1;
+
+  padding:10px;
+
+  border:1px solid #2c4a64;
+  border-radius:10px;
+
+  background:#091827;
+  color:white;
+}
+
+.mosque-card{
+  padding:12px;
+
+  margin-bottom:10px;
+
+  background:#0a192a;
+
+  border:1px solid #294861;
+  border-radius:14px;
+}
+
+.mosque-top{
+  display:flex;
   gap:10px;
 }
 
-.panel {
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:12px;
+.mosque-photo{
+  width:88px;
+  height:76px;
+
+  border-radius:10px;
+
+  background:
+  linear-gradient(
+    145deg,
+    #15334b,
+    #071421
+  );
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:32px;
 }
 
-.panel h3 {
-  margin:0 0 9px;
+.mosque-main{
+  flex:1;
+}
+
+.mosque-title{
   font-size:14px;
-  color:var(--cyan);
+  font-weight:bold;
 }
 
-.layer-row,
-.status-row {
+.mosque-meta{
+  font-size:10px;
+  color:var(--muted);
+
+  line-height:1.7;
+
+  margin-top:5px;
+}
+
+.badge{
+  display:inline-block;
+
+  border-radius:20px;
+
+  padding:4px 8px;
+
+  margin-bottom:7px;
+
+  font-size:9px;
+}
+
+.badge.confirmed{
+  color:var(--green);
+  border:1px solid var(--green);
+}
+
+.badge.review{
+  color:var(--yellow);
+  border:1px solid var(--yellow);
+}
+
+.mosque-bottom{
+  display:flex;
+  justify-content:space-between;
+
+  border-top:1px solid #20394f;
+
+  padding-top:9px;
+  margin-top:9px;
+
+  font-size:9px;
+  color:var(--muted);
+}
+
+/* DOCUMENTS */
+
+.document{
   display:flex;
   align-items:center;
-  gap:8px;
-  margin:7px 0;
-  font-size:13px;
-}
+  gap:10px;
 
-.dot {
-  width:9px;
-  height:9px;
-  border-radius:50%;
-}
+  padding:11px;
 
-/* NETWORK */
+  margin-bottom:8px;
 
-.map {
-  min-height:650px;
-  background:
-  radial-gradient(circle at 50% 45%,#10263a,#07111f 65%);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:16px;
-  overflow:hidden;
-}
+  background:#0a1929;
 
-.desktop-map {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-}
-
-.node {
-  background:var(--panel);
-  border:1px solid #2e4c67;
+  border:1px solid #29445e;
   border-radius:12px;
-  padding:14px;
-  cursor:pointer;
-  transition:.18s;
-  min-height:90px;
 }
 
-.node:hover {
-  transform:translateY(-2px);
-  border-color:var(--cyan);
-}
+.doc-icon{
+  width:42px;
+  height:42px;
 
-.node h4 {
-  margin:0 0 6px;
-}
-
-.node p {
-  margin:0;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.5;
-}
-
-.node .meta {
-  margin-top:8px;
-  font-size:11px;
-  color:#9db3c6;
-}
-
-/* EVIDENCE COLORS */
-
-.node[data-status="confirmed"] {
-  border-left:4px solid var(--green);
-}
-
-.node[data-status="verify"] {
-  border-left:4px solid var(--yellow);
-}
-
-.node[data-status="lead"] {
-  border-left:4px solid var(--orange);
-}
-
-.node[data-status="open"] {
-  border-left:4px solid var(--grey);
-}
-
-.node[data-status="conflict"] {
-  border-left:4px solid var(--red);
-}
-
-/* MOBILE */
-
-.mobile-drill {
-  display:none;
-}
-
-.breadcrumb {
-  font-size:12px;
-  color:var(--muted);
-  margin-bottom:10px;
-}
-
-.mobile-card {
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:14px;
-  margin:10px 0;
-  cursor:pointer;
-}
-
-.mobile-card strong {
-  display:block;
-  margin-bottom:5px;
-}
-
-.mobile-toolbar {
   display:flex;
-  gap:8px;
-  margin-bottom:10px;
-  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:9px;
+
+  background:#10283f;
+
+  font-size:21px;
 }
 
-/* DETAILS */
-
-.detail-title {
-  font-size:18px;
-  font-weight:800;
-  margin-bottom:5px;
+.doc-main{
+  flex:1;
 }
 
-.detail-sub {
-  color:var(--muted);
+.doc-title{
   font-size:12px;
 }
 
-.detail-section {
-  margin-top:14px;
-}
+.doc-meta{
+  color:var(--muted);
 
-.detail-section h4 {
-  margin:0 0 7px;
-  color:var(--cyan);
-  font-size:13px;
-}
-
-.tag {
-  display:inline-block;
-  padding:3px 7px;
-  border-radius:999px;
-  border:1px solid #39556f;
-  font-size:10px;
+  font-size:9px;
+  margin-top:5px;
 }
 
 /* TIMELINE */
 
-.timeline {
-  margin-top:20px;
+.timeline{
+  margin-top:14px;
 }
 
-.timeline-track {
+.timeline-line{
   height:4px;
-  background:#24384d;
-  border-radius:99px;
+
+  background:#263f55;
+
+  margin:24px 12px 13px;
+
   position:relative;
 }
 
-.timeline-track::after {
+.timeline-line:before{
   content:"";
+
   position:absolute;
-  left:20%;
-  right:20%;
+
+  left:5%;
+  right:5%;
   top:0;
+
   height:4px;
+
   background:var(--cyan);
-  border-radius:99px;
 }
 
-.timeline-labels {
+.timeline-dates{
   display:flex;
   justify-content:space-between;
+
   color:var(--muted);
-  font-size:10px;
-  margin-top:5px;
+  font-size:9px;
 }
 
-.hidden {
-  display:none !important;
-}
+/* EMPTY */
 
-footer {
-  padding:15px;
+.empty{
+  padding:28px 10px;
+
   text-align:center;
-  color:#65778b;
-  font-size:11px;
+
+  color:var(--muted);
 }
 
-/* MOBILE RESPONSIVE */
+/* BOTTOM NAV */
 
-@media (max-width:900px) {
+.bottom-nav{
+  position:fixed;
 
-  .layout {
-    grid-template-columns:1fr;
+  bottom:0;
+  left:0;
+  right:0;
+
+  z-index:200;
+
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+
+  background:
+  rgba(7,19,31,.98);
+
+  border-top:
+  1px solid #29445f;
+
+  padding:
+  8px
+  4px
+  calc(8px + env(safe-area-inset-bottom));
+
+  backdrop-filter:
+  blur(14px);
+}
+
+.nav-btn{
+  border:0;
+  background:transparent;
+
+  color:var(--muted);
+
+  display:flex;
+  flex-direction:column;
+
+  justify-content:center;
+  align-items:center;
+
+  gap:4px;
+
+  font-size:9px;
+}
+
+.nav-icon{
+  font-size:22px;
+}
+
+.nav-btn.active{
+  color:var(--cyan);
+}
+
+/* DESKTOP */
+
+@media(min-width:850px){
+
+  body{
+    max-width:1200px;
+    margin:auto;
   }
 
-  .sidebar,
-  .details {
-    display:none;
+  .stats{
+    grid-template-columns:repeat(6,1fr);
   }
 
-  .desktop-map {
-    display:none;
+  .nodes{
+    grid-template-columns:repeat(3,1fr);
   }
 
-  .mobile-drill {
-    display:block;
+  .country-grid{
+    grid-template-columns:repeat(4,1fr);
   }
 
-  .map {
-    min-height:520px;
+  .bottom-nav{
+    max-width:1200px;
+    margin:auto;
   }
 
-  header {
-    flex-wrap:wrap;
-  }
-
-  .brand {
-    width:100%;
-  }
-
-  .top-actions {
-    margin-inline-start:0;
-  }
 }
 
 </style>
+
 </head>
 
 <body>
 
-<header>
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="header-top">
 
 <div class="brand">
-TRACE<span class="cyan">VERITY</span>
+TRACE<span>VERITY</span>
 </div>
 
-<div class="top-actions">
+<div class="language-row">
 
-<button class="lang active" data-lang="fa">
-FA
+<button
+class="lang-btn active"
+onclick="setLanguage('fa',this)">
+
+<img
+src="lion-sun-flag.jpg"
+alt="Persian">
+
+<span>FA</span>
+
 </button>
 
-<button class="lang" data-lang="da">
-DA
+
+<button
+class="lang-btn"
+onclick="setLanguage('da',this)">
+
+<span class="flag">🇩🇰</span>
+
+<span>DA</span>
+
 </button>
 
-<button class="lang" data-lang="en">
-EN
+
+<button
+class="lang-btn"
+onclick="setLanguage('en',this)">
+
+<span class="flag">🇺🇸</span>
+
+<span>EN</span>
+
 </button>
 
-<button id="eyeBtn">
-👁️
-</button>
+</div>
+
+</div>
+
+
+<div
+class="intro"
+id="intro">
+
+نقشه شواهد برای درک ساختارهای مذهبی،
+سازمانی، رسانه‌ای و مالی مرتبط با شبکه‌های
+شیعه دوازده‌امامی در ایران، اروپا و جهان.
 
 </div>
 
 </header>
 
-<div class="search-wrap">
+
+<!-- SEARCH -->
+
+<div class="search-area">
+
+<div class="search">
+
+<span>⌕</span>
 
 <input
-id="search"
-placeholder="جست‌وجو در شبکه، اسناد، افراد و سازمان‌ها…">
+id="mainSearch"
+placeholder="جستجو در افراد، سازمان‌ها، اسناد، مساجد و کشورها...">
 
 </div>
 
-<div class="layout">
+</div>
 
-<!-- LEFT SIDEBAR -->
 
-<aside class="sidebar">
+<div class="quick-controls">
 
-<div class="panel">
-
-<h3 data-i18n="layers">
+<button class="quick-btn">
+<span>◉</span>
 لایه‌ها
-</h3>
+</button>
 
-<label class="layer-row">
-<input type="checkbox" data-layer="org" checked>
-<span data-i18n="organizations">سازمان‌ها</span>
-</label>
-
-<label class="layer-row">
-<input type="checkbox" data-layer="people" checked>
-<span data-i18n="people">افراد</span>
-</label>
-
-<label class="layer-row">
-<input type="checkbox" data-layer="finance" checked>
-<span data-i18n="finance">مالی</span>
-</label>
-
-<label class="layer-row">
-<input type="checkbox" data-layer="property" checked>
-<span data-i18n="property">املاک</span>
-</label>
-
-<label class="layer-row">
-<input type="checkbox" data-layer="media" checked>
-<span data-i18n="media">رسانه</span>
-</label>
-
-<label class="layer-row">
-<input type="checkbox" data-layer="docs" checked>
-<span data-i18n="documents">اسناد</span>
-</label>
+<button class="quick-btn">
+<span>▽</span>
+فیلترها
+</button>
 
 </div>
 
-<div class="panel">
 
-<h3 data-i18n="evidence">
-وضعیت مدرک
-</h3>
+<!-- STATS -->
 
-<div class="status-row">
-<span class="dot" style="background:var(--green)"></span>
-<span data-i18n="confirmed">مستند</span>
+<div class="stats">
+
+<div class="stat">
+<div class="stat-icon">🌍</div>
+<div class="stat-number cyan">12</div>
+<div class="stat-label">کشورها</div>
 </div>
 
-<div class="status-row">
-<span class="dot" style="background:var(--yellow)"></span>
-<span data-i18n="verify">نیازمند بررسی</span>
+<div class="stat">
+<div class="stat-icon">🏛️</div>
+<div class="stat-number green">84</div>
+<div class="stat-label">سازمان‌ها</div>
 </div>
 
-<div class="status-row">
-<span class="dot" style="background:var(--orange)"></span>
-<span data-i18n="lead">سرنخ تحقیقی</span>
+<div class="stat">
+<div class="stat-icon">👤</div>
+<div class="stat-number blue">362</div>
+<div class="stat-label">افراد</div>
 </div>
 
-<div class="status-row">
-<span class="dot" style="background:var(--grey)"></span>
-<span data-i18n="open">سؤال باز</span>
+<div class="stat">
+<div class="stat-icon">📄</div>
+<div class="stat-number yellow">1,248</div>
+<div class="stat-label">اسناد</div>
 </div>
 
-<div class="status-row">
-<span class="dot" style="background:var(--red)"></span>
-<span data-i18n="conflict">تعارض/اختلاف</span>
+<div class="stat">
+<div class="stat-icon">🔗</div>
+<div class="stat-number purple">2,317</div>
+<div class="stat-label">روابط</div>
+</div>
+
+<div class="stat">
+<div class="stat-icon">👁️</div>
+<div class="stat-number orange">12,846</div>
+<div class="stat-label">بازدید Demo</div>
 </div>
 
 </div>
 
-</aside>
 
-<!-- NETWORK -->
+<!-- HOME -->
 
-<main class="map">
+<section
+id="home"
+class="page active">
 
-<div class="desktop-map">
+<div class="section">
 
-<div
-class="node"
-data-id="core"
-data-layer="org"
-data-status="open">
+<div class="section-title">
+فهم شبکه
+</div>
 
-<h4 data-i18n="core">
+<div class="section-subtitle">
+
+نمای کلی ساختار موضوعی تحقیق.
+هر رابطه باید دارای منبع و وضعیت
+اعتبار مشخص باشد.
+
+</div>
+
+
+<div class="network">
+
+<div class="center-node">
+
+<strong>
+شبکه شیعه
+دوازده‌امامی
+</strong>
+
+<small>
 هسته تحقیق
-</h4>
+</small>
 
-<p data-i18n="coreDesc">
-نقطه شروع برای ورود به شبکه‌های سازمانی، مالی، رسانه‌ای و اسنادی.
-</p>
+</div>
 
-<div class="meta">
-Global / Master
+
+<div class="nodes">
+
+
+<div class="node green">
+
+<div class="node-icon">
+🎓
+</div>
+
+<div class="node-title">
+حوزه و مرجعیت
+</div>
+
+<div class="node-desc">
+
+حوزه علمیه قم،
+حوزه نجف،
+مدارس،
+مراجع و مراکز آموزشی.
+
+</div>
+
+<div class="node-status">
+ساختار موضوعی
+</div>
+
+</div>
+
+
+<div class="node purple">
+
+<div class="node-icon">
+🕌
+</div>
+
+<div class="node-title">
+مساجد و مراکز مذهبی
+</div>
+
+<div class="node-desc">
+
+مساجد،
+حسینیه‌ها،
+مراکز فرهنگی،
+انجمن‌ها و مؤسسات.
+
+</div>
+
+<div class="node-status">
+اروپا و جهان
+</div>
+
+</div>
+
+
+<div class="node red">
+
+<div class="node-icon">
+🏴
+</div>
+
+<div class="node-title">
+ایران و نهادهای حکومتی
+</div>
+
+<div class="node-desc">
+
+نهادهای حکومتی،
+نهادهای مذهبی،
+سپاه پاسداران
+و ساختارهای مرتبط.
+
+</div>
+
+<div class="node-status">
+روابط فقط با سند
+</div>
+
+</div>
+
+
+<div class="node blue">
+
+<div class="node-icon">
+📡
+</div>
+
+<div class="node-title">
+رسانه و ارتباطات
+</div>
+
+<div class="node-desc">
+
+تلویزیون،
+رادیو،
+وب‌سایت‌ها،
+شبکه‌های اجتماعی
+و کانال‌ها.
+
+</div>
+
+<div class="node-status">
+شبکه رسانه‌ای
+</div>
+
+</div>
+
+
+<div class="node cyan-border">
+
+<div class="node-icon">
+💰
+</div>
+
+<div class="node-title">
+شبکه مالی و دارایی‌ها
+</div>
+
+<div class="node-desc">
+
+منابع مالی،
+شرکت‌ها،
+املاک،
+کمک‌ها
+و انتقال‌های مستند.
+
+</div>
+
+<div class="node-status">
+شواهد مالی
+</div>
+
+</div>
+
+
+<div class="node yellow">
+
+<div class="node-icon">
+👥
+</div>
+
+<div class="node-title">
+افراد و مدیران
+</div>
+
+<div class="node-desc">
+
+روحانیون،
+مدیران،
+اعضای هیئت‌مدیره
+و اشخاص مرتبط.
+
+</div>
+
+<div class="node-status">
+روابط اشخاص
 </div>
 
 </div>
 
 
 <div
-class="node"
-data-id="europe"
-data-layer="org"
-data-status="verify">
+class="node purple"
+onclick="showPage('documents')">
 
-<h4 data-i18n="europe">
-اروپا
-</h4>
+<div class="node-icon">
+📁
+</div>
 
-<p data-i18n="europeDesc">
-ورود به پرونده‌های کشورها و ارتباطات فرامرزی.
-</p>
+<div class="node-title">
+اسناد و شواهد
+</div>
 
-<div class="meta">
-DK · SE · NO · DE
+<div class="node-desc">
+
+اسناد رسمی،
+ثبت شرکت،
+املاک،
+گزارش‌ها،
+ویدئو و منابع عمومی.
+
+</div>
+
+<div class="node-status">
+مشاهده اسناد
 </div>
 
 </div>
 
 
 <div
-class="node"
-data-id="media"
-data-layer="media"
-data-status="verify">
+class="node blue"
+onclick="showPage('network')">
 
-<h4 data-i18n="media">
-رسانه
-</h4>
-
-<p data-i18n="mediaDesc">
-تلویزیون، رادیو، وب، زبان‌ها و اپراتورها.
-</p>
-
-<div class="meta">
-TV · Radio · Web
+<div class="node-icon">
+🌍
 </div>
 
+<div class="node-title">
+اروپا و جغرافیا
 </div>
 
+<div class="node-desc">
 
-<div
-class="node"
-data-id="finance"
-data-layer="finance"
-data-status="open">
-
-<h4 data-i18n="finance">
-مالی
-</h4>
-
-<p data-i18n="financeDesc">
-کمک‌ها، دارایی‌ها، انتقال‌ها و منابع مالی.
-</p>
-
-<div class="meta">
-Funding · Assets
-</div>
+دانمارک،
+سوئد،
+نروژ،
+آلمان،
+فرانسه
+و کشورهای دیگر.
 
 </div>
 
-
-<div
-class="node"
-data-id="documents"
-data-layer="docs"
-data-status="confirmed">
-
-<h4 data-i18n="documents">
-اسناد
-</h4>
-
-<p data-i18n="documentsDesc">
-PDF، رجیسترها، گزارش‌ها و منابع اصلی.
-</p>
-
-<div class="meta">
-PDF · Registry · Reports
+<div class="node-status">
+ورود به اروپا
 </div>
 
-</div>
-
-
-<div
-class="node"
-data-id="people"
-data-layer="people"
-data-status="verify">
-
-<h4 data-i18n="people">
-افراد
-</h4>
-
-<p data-i18n="peopleDesc">
-نقش‌ها، سمت‌ها و ارتباطات مستند.
-</p>
-
-<div class="meta">
-Roles · Relations
 </div>
 
 </div>
@@ -618,905 +1279,970 @@ Roles · Relations
 </div>
 
 
-<!-- MOBILE DRILL DOWN -->
+<div class="legend">
 
-<div class="mobile-drill">
+<div class="legend-title">
+راهنمای روابط
+</div>
 
-<div class="mobile-toolbar">
+<div class="legend-row">
 
-<button id="backBtn">
-← <span data-i18n="back">بازگشت</span>
-</button>
+<div class="legend-line">
+<div class="line green"></div>
+مستند با سند
+</div>
 
-<button id="overviewBtn"
-data-i18n="overview">
-نمای کلی
-</button>
+<div class="legend-line">
+<div class="line blue"></div>
+رابطه ساختاری
+</div>
+
+<div class="legend-line">
+<div class="line yellow"></div>
+در حال بررسی
+</div>
+
+<div class="legend-line">
+<div class="line dashed"></div>
+ادعا / تأییدنشده
+</div>
 
 </div>
 
-<div
-class="breadcrumb"
-id="breadcrumb">
-
-TRACEVERITY
-
 </div>
-
-<div id="mobileList"></div>
 
 </div>
 
 
-<!-- TIMELINE -->
+<div class="section">
+
+<div class="section-title">
+خط زمانی
+</div>
+
+<div class="section-subtitle">
+برای ورود به جزئیات تاریخی،
+سال یا دوره مورد نظر انتخاب می‌شود.
+</div>
 
 <div class="timeline">
 
-<div class="timeline-track"></div>
+<div class="timeline-line">
+</div>
 
-<div class="timeline-labels">
+<div class="timeline-dates">
 
+<span>1979</span>
+<span>1990</span>
 <span>2000</span>
 <span>2010</span>
-<span>2020</span>
-<span>2026</span>
+<span>2020+</span>
 
 </div>
 
 </div>
 
-</main>
+</div>
+
+</section>
 
 
-<!-- DETAILS -->
+<!-- NETWORK / EUROPE -->
 
-<aside class="details">
+<section
+id="network"
+class="page">
 
-<div class="panel">
+<div class="section">
 
-<h3 data-i18n="details">
-جزئیات
-</h3>
+<div class="section-title">
+🌍 اروپا و کشورهای مرتبط
+</div>
+
+<div class="section-subtitle">
+
+هر کشور از یک قالب تحقیقاتی
+استاندارد استفاده می‌کند.
+
+</div>
+
+
+<div class="country-list">
+
 
 <div
-class="detail-title"
-id="detailTitle">
+class="country-card"
+onclick="openCountry('denmark')">
 
-TRACEVERITY
+<div class="country-flag">
+🇩🇰
+</div>
+
+<div class="country-info">
+
+<div class="country-name">
+دانمارک
+</div>
+
+<div class="country-meta">
+مساجد • سازمان‌ها • افراد • مالی • اسناد
+</div>
 
 </div>
+
+<div class="progress">
+78%
+</div>
+
+</div>
+
+
+<div class="country-card">
+
+<div class="country-flag">
+🇸🇪
+</div>
+
+<div class="country-info">
+
+<div class="country-name">
+سوئد
+</div>
+
+<div class="country-meta">
+تحقیق در حال تکمیل
+</div>
+
+</div>
+
+<div class="progress yellow">
+42%
+</div>
+
+</div>
+
+
+<div class="country-card">
+
+<div class="country-flag">
+🇳🇴
+</div>
+
+<div class="country-info">
+
+<div class="country-name">
+نروژ
+</div>
+
+<div class="country-meta">
+تحقیق در حال تکمیل
+</div>
+
+</div>
+
+<div class="progress orange">
+31%
+</div>
+
+</div>
+
+
+<div class="country-card">
+
+<div class="country-flag">
+🇩🇪
+</div>
+
+<div class="country-info">
+
+<div class="country-name">
+آلمان
+</div>
+
+<div class="country-meta">
+تحقیق اولیه
+</div>
+
+</div>
+
+<div class="progress orange">
+18%
+</div>
+
+</div>
+
+
+<div class="country-card">
+
+<div class="country-flag">
+🇫🇷
+</div>
+
+<div class="country-info">
+
+<div class="country-name">
+فرانسه
+</div>
+
+<div class="country-meta">
+بررسی آغاز نشده
+</div>
+
+</div>
+
+<div class="progress red">
+0%
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- COUNTRY -->
+
+<section
+id="country"
+class="page">
+
+<div class="country-title">
+
+<span>
+🇩🇰
+</span>
+
+دانمارک
+
+</div>
+
+
+<div class="section-subtitle">
+
+قالب استاندارد تحقیق کشور.
+فیلدهای خالی بعداً با اسناد
+و منابع معتبر تکمیل می‌شوند.
+
+</div>
+
+
+<br>
+
+
+<div class="country-grid">
+
 
 <div
-class="detail-sub"
-id="detailSub"
-data-i18n="selectNode">
+class="country-item"
+onclick="showPage('mosques')">
 
-یک گره را انتخاب کنید.
+<div class="country-item-icon">
+🕌
+</div>
+
+<div class="country-item-number green">
+14
+</div>
+
+<div class="country-item-label">
+مساجد و مراکز
+</div>
 
 </div>
 
 
-<div class="detail-section">
+<div class="country-item">
 
-<h4 data-i18n="evidence">
-وضعیت مدرک
-</h4>
+<div class="country-item-icon">
+🏛️
+</div>
 
-<span
-class="tag"
-id="detailStatus">
+<div class="country-item-number green">
+11
+</div>
 
-—
+<div class="country-item-label">
+سازمان‌ها و مؤسسات
+</div>
 
+</div>
+
+
+<div class="country-item">
+
+<div class="country-item-icon">
+👥
+</div>
+
+<div class="country-item-number blue">
+23
+</div>
+
+<div class="country-item-label">
+افراد و مدیران
+</div>
+
+</div>
+
+
+<div class="country-item">
+
+<div class="country-item-icon">
+🔗
+</div>
+
+<div class="country-item-number purple">
+37
+</div>
+
+<div class="country-item-label">
+روابط ثبت‌شده
+</div>
+
+</div>
+
+
+<div class="country-item">
+
+<div class="country-item-icon">
+💰
+</div>
+
+<div class="country-item-number yellow">
+9
+</div>
+
+<div class="country-item-label">
+منابع مالی
+</div>
+
+</div>
+
+
+<div class="country-item">
+
+<div class="country-item-icon">
+🏢
+</div>
+
+<div class="country-item-number cyan">
+7
+</div>
+
+<div class="country-item-label">
+املاک و دارایی‌ها
+</div>
+
+</div>
+
+
+<div class="country-item">
+
+<div class="country-item-icon">
+📡
+</div>
+
+<div class="country-item-number purple">
+8
+</div>
+
+<div class="country-item-label">
+رسانه‌ها
+</div>
+
+</div>
+
+
+<div
+class="country-item"
+onclick="showPage('documents')">
+
+<div class="country-item-icon">
+📄
+</div>
+
+<div class="country-item-number yellow">
+32
+</div>
+
+<div class="country-item-label">
+اسناد و مدارک
+</div>
+
+</div>
+
+
+<div class="country-item">
+
+<div class="country-item-icon">
+🎓
+</div>
+
+<div class="country-item-number green">
+6
+</div>
+
+<div class="country-item-label">
+حوزه‌ها و آموزش
+</div>
+
+</div>
+
+
+<div class="country-item">
+
+<div class="country-item-icon">
+🌐
+</div>
+
+<div class="country-item-number blue">
+5
+</div>
+
+<div class="country-item-label">
+ارتباطات بین‌المللی
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MOSQUES -->
+
+<section
+id="mosques"
+class="page">
+
+<div class="section-title">
+🕌 مساجد و مراکز مذهبی
+</div>
+
+<div class="section-subtitle">
+کشور: دانمارک
+</div>
+
+<br>
+
+
+<div class="filter-row">
+
+<button>
+جستجو
+</button>
+
+<button>
+فیلتر
+</button>
+
+</div>
+
+
+<div class="mosque-card">
+
+<div class="badge confirmed">
+● مستند
+</div>
+
+<div class="mosque-top">
+
+<div class="mosque-photo">
+🕌
+</div>
+
+<div class="mosque-main">
+
+<div class="mosque-title">
+پرونده مرکز مذهبی
+</div>
+
+<div class="mosque-meta">
+📍 دانمارک<br>
+📅 اطلاعات ثبتی موجود<br>
+🔗 روابط مستند در پرونده
+</div>
+
+</div>
+
+</div>
+
+<div class="mosque-bottom">
+
+<span>
+👥 افراد
+</span>
+
+<span>
+🔗 روابط
+</span>
+
+<span>
+📄 اسناد
 </span>
 
 </div>
 
+</div>
 
-<div class="detail-section">
 
-<h4 data-i18n="sources">
-منابع
-</h4>
+<div class="mosque-card">
 
-<div
-id="detailSources"
-class="detail-sub">
+<div class="badge review">
+● در حال بررسی
+</div>
 
-—
+<div class="mosque-top">
+
+<div class="mosque-photo">
+🕌
+</div>
+
+<div class="mosque-main">
+
+<div class="mosque-title">
+مرکز مذهبی
+</div>
+
+<div class="mosque-meta">
+📍 دانمارک<br>
+اطلاعات تکمیلی در حال بررسی
+</div>
+
+</div>
+
+</div>
+
+<div class="mosque-bottom">
+
+<span>
+👥 افراد
+</span>
+
+<span>
+🔗 روابط
+</span>
+
+<span>
+📄 اسناد
+</span>
 
 </div>
 
 </div>
 
 
-<div class="detail-section">
+<div class="mosque-card">
 
-<h4 data-i18n="documents">
+<div class="badge review">
+● اطلاعات ناقص
+</div>
+
+<div class="mosque-top">
+
+<div class="mosque-photo">
+🕌
+</div>
+
+<div class="mosque-main">
+
+<div class="mosque-title">
+مرکز ثبت‌شده
+</div>
+
+<div class="mosque-meta">
+📍 دانمارک<br>
+پرونده برای تکمیل باز است
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SEARCH PAGE -->
+
+<section
+id="searchPage"
+class="page">
+
+<div class="section">
+
+<div class="section-title">
+🔍 جستجو
+</div>
+
+<div class="section-subtitle">
+
+جستجو در کل شبکه:
+افراد، سازمان‌ها، مساجد،
+کشورها، اسناد و روابط.
+
+</div>
+
+<br>
+
+<div class="search">
+
+<span>⌕</span>
+
+<input
+placeholder="نام، سازمان، سند یا کشور...">
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DOCUMENTS -->
+
+<section
+id="documents"
+class="page">
+
+<div class="section-title">
+📁 اسناد و شواهد
+</div>
+
+<br>
+
+
+<div class="document">
+
+<div class="doc-icon">
+📄
+</div>
+
+<div class="doc-main">
+
+<div class="doc-title">
+اسناد رسمی
+</div>
+
+<div class="doc-meta">
+ثبت شرکت • رجیستر • PDF
+</div>
+
+</div>
+
+</div>
+
+
+<div class="document">
+
+<div class="doc-icon">
+🏢
+</div>
+
+<div class="doc-main">
+
+<div class="doc-title">
+اسناد املاک
+</div>
+
+<div class="doc-meta">
+ثبت ملک • مالکیت • تاریخچه
+</div>
+
+</div>
+
+</div>
+
+
+<div class="document">
+
+<div class="doc-icon">
+💰
+</div>
+
+<div class="doc-main">
+
+<div class="doc-title">
+گزارش‌های مالی
+</div>
+
+<div class="doc-meta">
+صورت‌حساب • گزارش • منابع عمومی
+</div>
+
+</div>
+
+</div>
+
+
+<div class="document">
+
+<div class="doc-icon">
+🎥
+</div>
+
+<div class="doc-main">
+
+<div class="doc-title">
+تصویر و ویدئو
+</div>
+
+<div class="doc-meta">
+آرشیو رسانه‌ای
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REPORTS -->
+
+<section
+id="reports"
+class="page">
+
+<div class="section">
+
+<div class="section-title">
+📊 گزارش‌ها
+</div>
+
+<div class="section-subtitle">
+
+گزارش‌های تحلیلی TRACEVERITY
+بعداً در این قسمت نمایش داده می‌شوند.
+
+</div>
+
+<div class="empty">
+هنوز گزارشی ثبت نشده.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+<button
+id="nav-home"
+class="nav-btn active"
+onclick="showPage('home')">
+
+<div class="nav-icon">
+🏠
+</div>
+
+خانه
+
+</button>
+
+
+<button
+id="nav-network"
+class="nav-btn"
+onclick="showPage('network')">
+
+<div class="nav-icon">
+🕸️
+</div>
+
+شبکه
+
+</button>
+
+
+<button
+id="nav-searchPage"
+class="nav-btn"
+onclick="showPage('searchPage')">
+
+<div class="nav-icon">
+🔍
+</div>
+
+جستجو
+
+</button>
+
+
+<button
+id="nav-documents"
+class="nav-btn"
+onclick="showPage('documents')">
+
+<div class="nav-icon">
+📄
+</div>
+
 اسناد
-</h4>
 
-<div
-id="detailDocs"
-class="detail-sub">
+</button>
 
-—
 
+<button
+id="nav-reports"
+class="nav-btn"
+onclick="showPage('reports')">
+
+<div class="nav-icon">
+📊
 </div>
 
-</div>
+گزارش‌ها
 
-</div>
+</button>
 
-</aside>
-
-</div>
-
-
-<footer>
-
-TRACEVERITY • Evidence-based research network
-
-</footer>
+</nav>
 
 
 <script>
 
-/* TRANSLATIONS */
+/* PAGE NAVIGATION */
 
-const translations = {
+function showPage(page){
 
-fa: {
+  document
+  .querySelectorAll(".page")
+  .forEach(function(p){
 
-layers:"لایه‌ها",
-organizations:"سازمان‌ها",
-people:"افراد",
-finance:"مالی",
-property:"املاک",
-media:"رسانه",
-documents:"اسناد",
+    p.classList.remove("active");
 
-evidence:"وضعیت مدرک",
-
-confirmed:"مستند",
-verify:"نیازمند بررسی",
-lead:"سرنخ تحقیقی",
-open:"سؤال باز",
-conflict:"تعارض/اختلاف",
-
-core:"هسته تحقیق",
-
-coreDesc:
-"نقطه شروع برای ورود به شبکه‌های سازمانی، مالی، رسانه‌ای و اسنادی.",
-
-europe:"اروپا",
-
-europeDesc:
-"ورود به پرونده‌های کشورها و ارتباطات فرامرزی.",
-
-mediaDesc:
-"تلویزیون، رادیو، وب، زبان‌ها و اپراتورها.",
-
-financeDesc:
-"کمک‌ها، دارایی‌ها، انتقال‌ها و منابع مالی.",
-
-documentsDesc:
-"PDF، رجیسترها، گزارش‌ها و منابع اصلی.",
-
-peopleDesc:
-"نقش‌ها، سمت‌ها و ارتباطات مستند.",
-
-back:"بازگشت",
-overview:"نمای کلی",
-details:"جزئیات",
-
-selectNode:
-"یک گره را انتخاب کنید.",
-
-sources:"منابع"
-
-},
+  });
 
 
-da: {
+  let target =
+  document.getElementById(page);
 
-layers:"Lag",
-organizations:"Organisationer",
-people:"Personer",
-finance:"Finans",
-property:"Ejendom",
-media:"Medier",
-documents:"Dokumenter",
+  if(target){
 
-evidence:"Evidensstatus",
+    target.classList.add("active");
 
-confirmed:"Dokumenteret",
-verify:"Kræver verifikation",
-lead:"Research-spor",
-open:"Åbent spørgsmål",
-conflict:"Konflikt/uenighed",
-
-core:"Research-kernen",
-
-coreDesc:
-"Startpunkt for organisatoriske, finansielle, mediemæssige og dokumentbaserede netværk.",
-
-europe:"Europa",
-
-europeDesc:
-"Adgang til landesager og grænseoverskridende forbindelser.",
-
-mediaDesc:
-"TV, radio, web, sprog og operatører.",
-
-financeDesc:
-"Donationer, aktiver, overførsler og finansieringskilder.",
-
-documentsDesc:
-"PDF'er, registre, rapporter og primærkilder.",
-
-peopleDesc:
-"Roller, positioner og dokumenterede relationer.",
-
-back:"Tilbage",
-overview:"Oversigt",
-details:"Detaljer",
-selectNode:"Vælg en node.",
-sources:"Kilder"
-
-},
+  }
 
 
-en: {
+  document
+  .querySelectorAll(".nav-btn")
+  .forEach(function(n){
 
-layers:"Layers",
-organizations:"Organizations",
-people:"People",
-finance:"Finance",
-property:"Property",
-media:"Media",
-documents:"Documents",
+    n.classList.remove("active");
 
-evidence:"Evidence status",
+  });
 
-confirmed:"Confirmed",
-verify:"Needs verification",
-lead:"Investigative lead",
-open:"Open question",
-conflict:"Conflicting",
 
-core:"Research core",
+  let nav =
+  document.getElementById(
+    "nav-" + page
+  );
 
-coreDesc:
-"Starting point for organizational, financial, media and documentary networks.",
 
-europe:"Europe",
+  if(nav){
 
-europeDesc:
-"Enter country cases and cross-border relationships.",
+    nav.classList.add("active");
 
-mediaDesc:
-"TV, radio, web, languages and operators.",
+  }
 
-financeDesc:
-"Donations, assets, transfers and funding sources.",
 
-documentsDesc:
-"PDFs, registries, reports and primary sources.",
-
-peopleDesc:
-"Roles, positions and documented relationships.",
-
-back:"Back",
-overview:"Overview",
-details:"Details",
-selectNode:"Select a node.",
-sources:"Sources"
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
-};
 
+/* COUNTRY */
 
-/* MOBILE HIERARCHY */
+function openCountry(country){
 
-const hierarchy = {
+  if(country === "denmark"){
 
-root:[
+    showPage("country");
 
-{
-id:"core",
-labelKey:"core",
-layer:"org",
-status:"open"
-},
-
-{
-id:"europe",
-labelKey:"europe",
-layer:"org",
-status:"verify"
-},
-
-{
-id:"media",
-labelKey:"media",
-layer:"media",
-status:"verify"
-},
-
-{
-id:"finance",
-labelKey:"finance",
-layer:"finance",
-status:"open"
-},
-
-{
-id:"documents",
-labelKey:"documents",
-layer:"docs",
-status:"confirmed"
-}
-
-],
-
-
-europe:[
-
-{
-id:"denmark",
-label:"🇩🇰 Denmark",
-layer:"org",
-status:"confirmed"
-},
-
-{
-id:"sweden",
-label:"🇸🇪 Sweden",
-layer:"org",
-status:"verify"
-},
-
-{
-id:"norway",
-label:"🇳🇴 Norway",
-layer:"org",
-status:"open"
-},
-
-{
-id:"germany",
-label:"🇩🇪 Germany",
-layer:"org",
-status:"verify"
-}
-
-],
-
-
-denmark:[
-
-{
-id:"dk-org",
-label:"Organizations",
-layer:"org",
-status:"confirmed"
-},
-
-{
-id:"dk-people",
-label:"People",
-layer:"people",
-status:"verify"
-},
-
-{
-id:"dk-property",
-label:"Property",
-layer:"property",
-status:"confirmed"
-},
-
-{
-id:"dk-finance",
-label:"Finance",
-layer:"finance",
-status:"verify"
-},
-
-{
-id:"dk-docs",
-label:"Documents",
-layer:"docs",
-status:"confirmed"
-}
-
-],
-
-
-media:[
-
-{
-id:"tv",
-label:"Television",
-layer:"media",
-status:"verify"
-},
-
-{
-id:"radio",
-label:"Radio",
-layer:"media",
-status:"verify"
-},
-
-{
-id:"web",
-label:"Web / News",
-layer:"media",
-status:"verify"
-},
-
-{
-id:"languages",
-label:"Languages",
-layer:"media",
-status:"confirmed"
-}
-
-],
-
-
-finance:[
-
-{
-id:"donations",
-label:"Donations",
-layer:"finance",
-status:"verify"
-},
-
-{
-id:"assets",
-label:"Property / Assets",
-layer:"property",
-status:"verify"
-},
-
-{
-id:"transfers",
-label:"Transfers",
-layer:"finance",
-status:"open"
-}
-
-],
-
-
-documents:[
-
-{
-id:"official",
-label:"Official records",
-layer:"docs",
-status:"confirmed"
-},
-
-{
-id:"academic",
-label:"Academic research",
-layer:"docs",
-status:"confirmed"
-},
-
-{
-id:"media-reports",
-label:"Media reports",
-layer:"docs",
-status:"verify"
-}
-
-]
-
-};
-
-
-let lang="fa";
-
-let path=["root"];
-
-
-function t(key){
-
-return translations[lang][key] || key;
+  }
 
 }
 
 
 /* LANGUAGE */
 
-function updateLanguage(){
+function setLanguage(language,button){
 
-document.documentElement.lang=lang;
+  document
+  .querySelectorAll(".lang-btn")
+  .forEach(function(b){
 
-document.documentElement.dir=
-lang==="fa" ? "rtl" : "ltr";
+    b.classList.remove("active");
 
-
-document
-.querySelectorAll("[data-i18n]")
-.forEach(el=>{
-
-el.textContent=
-t(el.dataset.i18n);
-
-});
+  });
 
 
-document
-.querySelectorAll(".lang")
-.forEach(b=>{
-
-b.classList.toggle(
-"active",
-b.dataset.lang===lang
-);
-
-});
+  button.classList.add("active");
 
 
-renderMobile();
+  if(language === "fa"){
 
-}
+    document.documentElement.dir="rtl";
 
+    document
+    .getElementById("intro")
+    .textContent =
+    "نقشه شواهد برای درک ساختارهای مذهبی، سازمانی، رسانه‌ای و مالی مرتبط با شبکه‌های شیعه دوازده‌امامی در ایران، اروپا و جهان.";
 
-document
-.querySelectorAll(".lang")
-.forEach(btn=>{
-
-btn.addEventListener(
-"click",
-()=>{
-
-lang=btn.dataset.lang;
-
-updateLanguage();
-
-});
-
-});
+  }
 
 
-/* LAYERS */
+  if(language === "da"){
 
-document
-.querySelectorAll(
-'input[data-layer]'
-)
-.forEach(cb=>{
+    document.documentElement.dir="ltr";
 
-cb.addEventListener(
-"change",
-applyLayers
-);
+    document
+    .getElementById("intro")
+    .textContent =
+    "Evidensbaseret kortlægning af religiøse, organisatoriske, mediemæssige og finansielle netværk.";
 
-});
+  }
 
 
-function applyLayers(){
+  if(language === "en"){
 
-const enabled=
-[
-...document.querySelectorAll(
-'input[data-layer]:checked'
-)
-]
-.map(x=>x.dataset.layer);
+    document.documentElement.dir="ltr";
 
+    document
+    .getElementById("intro")
+    .textContent =
+    "Evidence-based mapping of religious, organizational, media and financial networks.";
 
-document
-.querySelectorAll(".node")
-.forEach(n=>{
-
-n.classList.toggle(
-"hidden",
-!enabled.includes(
-n.dataset.layer
-)
-);
-
-});
-
-
-renderMobile();
+  }
 
 }
 
 
-/* EYE BUTTON */
+/* SEARCH DEMO */
 
 document
-.getElementById("eyeBtn")
+.getElementById("mainSearch")
 .addEventListener(
-"click",
-()=>{
+"focus",
+function(){
 
-document
-.querySelector(".sidebar")
-.classList.toggle("hidden");
+  showPage("searchPage");
 
 });
-
-
-/* DETAILS */
-
-const details={
-
-core:{
-title:"TRACEVERITY",
-sub:"Master research node",
-status:"open",
-sources:"—",
-docs:"—"
-},
-
-europe:{
-title:"Europe",
-sub:"Country and cross-border research layer",
-status:"verify",
-sources:"Official registries / reports",
-docs:"Country records"
-},
-
-media:{
-title:"Media",
-sub:"TV, radio, web and multilingual outreach",
-status:"verify",
-sources:"Official websites / archives",
-docs:"Media registry"
-},
-
-finance:{
-title:"Finance",
-sub:"Funding, assets and transfers",
-status:"open",
-sources:"Annual reports / registries",
-docs:"Financial records"
-},
-
-documents:{
-title:"Documents",
-sub:"Primary and secondary evidence archive",
-status:"confirmed",
-sources:"Official + academic",
-docs:"PDF / Registry / Reports"
-},
-
-people:{
-title:"People",
-sub:"Roles and relationships",
-status:"verify",
-sources:"Registries / documents",
-docs:"Person records"
-}
-
-};
-
-
-document
-.querySelectorAll(".node")
-.forEach(n=>{
-
-n.addEventListener(
-"click",
-()=>showDetails(
-n.dataset.id
-)
-);
-
-});
-
-
-function showDetails(id){
-
-const d=
-details[id] ||
-{
-title:id,
-sub:"Research node",
-status:"open",
-sources:"Pending",
-docs:"Pending"
-};
-
-
-document
-.getElementById("detailTitle")
-.textContent=d.title;
-
-
-document
-.getElementById("detailSub")
-.textContent=d.sub;
-
-
-document
-.getElementById("detailStatus")
-.textContent=d.status;
-
-
-document
-.getElementById("detailSources")
-.textContent=d.sources;
-
-
-document
-.getElementById("detailDocs")
-.textContent=d.docs;
-
-}
-
-
-/* MOBILE DRILL DOWN */
-
-function renderMobile(){
-
-const current=
-path[path.length-1];
-
-
-const children=
-hierarchy[current] || [];
-
-
-document
-.getElementById("breadcrumb")
-.textContent=
-"TRACEVERITY › "+
-path.slice(1).join(" › ");
-
-
-const list=
-document.getElementById(
-"mobileList"
-);
-
-
-list.innerHTML="";
-
-
-const enabled=
-[
-...document.querySelectorAll(
-'input[data-layer]:checked'
-)
-]
-.map(x=>x.dataset.layer);
-
-
-children
-.filter(
-x=>enabled.includes(
-x.layer
-)
-)
-.forEach(item=>{
-
-const card=
-document.createElement(
-"div"
-);
-
-
-card.className=
-"mobile-card";
-
-
-card.innerHTML=
-`
-<strong>
-${item.label || t(item.labelKey)}
-</strong>
-
-<span class="tag">
-${t(item.status) || item.status}
-</span>
-`;
-
-
-card.onclick=()=>{
-
-if(hierarchy[item.id]){
-
-path.push(item.id);
-
-renderMobile();
-
-}
-else{
-
-showDetails(item.id);
-
-}
-
-};
-
-
-list.appendChild(card);
-
-});
-
-}
-
-
-document
-.getElementById("backBtn")
-.onclick=()=>{
-
-if(path.length>1){
-
-path.pop();
-
-renderMobile();
-
-}
-
-};
-
-
-document
-.getElementById("overviewBtn")
-.onclick=()=>{
-
-path=["root"];
-
-renderMobile();
-
-};
-
-
-/* SEARCH */
-
-document
-.getElementById("search")
-.addEventListener(
-"input",
-()=>{
-
-const q=
-document
-.getElementById("search")
-.value
-.trim()
-.toLowerCase();
-
-
-document
-.querySelectorAll(".node")
-.forEach(n=>{
-
-const txt=
-n.innerText
-.toLowerCase();
-
-
-n.classList.toggle(
-"hidden",
-q &&
-!txt.includes(q)
-);
-
-});
-
-});
-
-
-updateLanguage();
-
-renderMobile();
 
 </script>
+
 
 </body>
 </html>
