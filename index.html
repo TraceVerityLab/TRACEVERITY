@@ -1,173 +1,1521 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TRACEVERITY</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * { box-sizing: border-box; }
+<title>TRACEVERITY</title>
 
-    body {
-      margin: 0;
-      background: #07111f;
-      color: #e8eef7;
-      font-family: Arial, sans-serif;
-    }
+<style>
+:root {
+  --bg:#07111f;
+  --panel:#0d1a2b;
+  --line:#29415b;
+  --cyan:#16c7dc;
+  --text:#e8eef7;
+  --muted:#8ea0b4;
 
-    header {
-      padding: 25px 18px 15px;
-      text-align: center;
-      border-bottom: 1px solid #243448;
-    }
+  --green:#38c172;
+  --yellow:#f4c542;
+  --orange:#f39c4a;
+  --grey:#7f8c8d;
+  --red:#e45d65;
+}
 
-    h1 {
-      margin: 0;
-      letter-spacing: 3px;
-      font-size: 28px;
-    }
+* {
+  box-sizing:border-box;
+}
 
-    .cyan { color: #16c7dc; }
+html,body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
 
-    .subtitle {
-      margin-top: 8px;
-      color: #8998aa;
-      font-size: 14px;
-    }
+body {
+  min-height:100vh;
+}
 
-    .network {
-      padding: 35px 15px;
-      max-width: 700px;
-      margin: auto;
-    }
+/* HEADER */
 
-    .node {
-      background: #0d1a2b;
-      border: 1px solid #29415b;
-      border-radius: 12px;
-      margin: 12px 0;
-      padding: 16px;
-      cursor: pointer;
-    }
+header {
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:#07111ff2;
+  border-bottom:1px solid #22344a;
+  padding:12px 14px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
 
-    .node-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 17px;
-    }
+.brand {
+  font-weight:800;
+  letter-spacing:2px;
+  white-space:nowrap;
+}
 
-    .arrow {
-      color: #16c7dc;
-      font-size: 22px;
-    }
+.cyan {
+  color:var(--cyan);
+}
 
-    .children {
-      display: none;
-      margin-top: 14px;
-      padding-top: 10px;
-      border-top: 1px solid #243448;
-    }
+.top-actions {
+  margin-inline-start:auto;
+  display:flex;
+  gap:7px;
+  align-items:center;
+}
 
-    .children.open {
-      display: block;
-    }
+button,input {
+  font:inherit;
+}
 
-    .child {
-      background: #081522;
-      border-right: 3px solid #16c7dc;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 6px;
-    }
+button {
+  background:#0d1a2b;
+  color:var(--text);
+  border:1px solid #35516e;
+  border-radius:9px;
+  padding:8px 10px;
+  cursor:pointer;
+}
 
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #64758a;
-      font-size: 12px;
-    }
-  </style>
+button.active {
+  border-color:var(--cyan);
+  color:var(--cyan);
+}
+
+/* SEARCH */
+
+.search-wrap {
+  padding:10px 14px;
+  border-bottom:1px solid #1e3044;
+  background:#091522;
+}
+
+#search {
+  width:100%;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid #304b66;
+  background:#07111f;
+  color:var(--text);
+}
+
+/* MAIN */
+
+.layout {
+  display:grid;
+  grid-template-columns:240px 1fr 280px;
+  gap:12px;
+  padding:12px;
+}
+
+.sidebar,
+.details {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.panel {
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px;
+}
+
+.panel h3 {
+  margin:0 0 9px;
+  font-size:14px;
+  color:var(--cyan);
+}
+
+.layer-row,
+.status-row {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:7px 0;
+  font-size:13px;
+}
+
+.dot {
+  width:9px;
+  height:9px;
+  border-radius:50%;
+}
+
+/* NETWORK */
+
+.map {
+  min-height:650px;
+  background:
+  radial-gradient(circle at 50% 45%,#10263a,#07111f 65%);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:16px;
+  overflow:hidden;
+}
+
+.desktop-map {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.node {
+  background:var(--panel);
+  border:1px solid #2e4c67;
+  border-radius:12px;
+  padding:14px;
+  cursor:pointer;
+  transition:.18s;
+  min-height:90px;
+}
+
+.node:hover {
+  transform:translateY(-2px);
+  border-color:var(--cyan);
+}
+
+.node h4 {
+  margin:0 0 6px;
+}
+
+.node p {
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.node .meta {
+  margin-top:8px;
+  font-size:11px;
+  color:#9db3c6;
+}
+
+/* EVIDENCE COLORS */
+
+.node[data-status="confirmed"] {
+  border-left:4px solid var(--green);
+}
+
+.node[data-status="verify"] {
+  border-left:4px solid var(--yellow);
+}
+
+.node[data-status="lead"] {
+  border-left:4px solid var(--orange);
+}
+
+.node[data-status="open"] {
+  border-left:4px solid var(--grey);
+}
+
+.node[data-status="conflict"] {
+  border-left:4px solid var(--red);
+}
+
+/* MOBILE */
+
+.mobile-drill {
+  display:none;
+}
+
+.breadcrumb {
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+
+.mobile-card {
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px;
+  margin:10px 0;
+  cursor:pointer;
+}
+
+.mobile-card strong {
+  display:block;
+  margin-bottom:5px;
+}
+
+.mobile-toolbar {
+  display:flex;
+  gap:8px;
+  margin-bottom:10px;
+  flex-wrap:wrap;
+}
+
+/* DETAILS */
+
+.detail-title {
+  font-size:18px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.detail-sub {
+  color:var(--muted);
+  font-size:12px;
+}
+
+.detail-section {
+  margin-top:14px;
+}
+
+.detail-section h4 {
+  margin:0 0 7px;
+  color:var(--cyan);
+  font-size:13px;
+}
+
+.tag {
+  display:inline-block;
+  padding:3px 7px;
+  border-radius:999px;
+  border:1px solid #39556f;
+  font-size:10px;
+}
+
+/* TIMELINE */
+
+.timeline {
+  margin-top:20px;
+}
+
+.timeline-track {
+  height:4px;
+  background:#24384d;
+  border-radius:99px;
+  position:relative;
+}
+
+.timeline-track::after {
+  content:"";
+  position:absolute;
+  left:20%;
+  right:20%;
+  top:0;
+  height:4px;
+  background:var(--cyan);
+  border-radius:99px;
+}
+
+.timeline-labels {
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:5px;
+}
+
+.hidden {
+  display:none !important;
+}
+
+footer {
+  padding:15px;
+  text-align:center;
+  color:#65778b;
+  font-size:11px;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width:900px) {
+
+  .layout {
+    grid-template-columns:1fr;
+  }
+
+  .sidebar,
+  .details {
+    display:none;
+  }
+
+  .desktop-map {
+    display:none;
+  }
+
+  .mobile-drill {
+    display:block;
+  }
+
+  .map {
+    min-height:520px;
+  }
+
+  header {
+    flex-wrap:wrap;
+  }
+
+  .brand {
+    width:100%;
+  }
+
+  .top-actions {
+    margin-inline-start:0;
+  }
+}
+
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>TRACE<span class="cyan">VERITY</span></h1>
-  <div class="subtitle">
-    شواهد • شبکه‌ها • اسناد • روابط
-  </div>
+
+<div class="brand">
+TRACE<span class="cyan">VERITY</span>
+</div>
+
+<div class="top-actions">
+
+<button class="lang active" data-lang="fa">
+FA
+</button>
+
+<button class="lang" data-lang="da">
+DA
+</button>
+
+<button class="lang" data-lang="en">
+EN
+</button>
+
+<button id="eyeBtn">
+👁️
+</button>
+
+</div>
+
 </header>
 
-<main class="network">
+<div class="search-wrap">
 
-  <div class="node" onclick="toggleNode('organizations')">
-    <div class="node-title">
-      <span>🏛 سازمان‌ها و مؤسسات</span>
-      <span class="arrow">+</span>
-    </div>
+<input
+id="search"
+placeholder="جست‌وجو در شبکه، اسناد، افراد و سازمان‌ها…">
 
-    <div id="organizations" class="children">
-      <div class="child">مؤسسات مذهبی</div>
-      <div class="child">سازمان‌ها</div>
-      <div class="child">شبکه‌های بین‌المللی</div>
-    </div>
-  </div>
+</div>
+
+<div class="layout">
+
+<!-- LEFT SIDEBAR -->
+
+<aside class="sidebar">
+
+<div class="panel">
+
+<h3 data-i18n="layers">
+لایه‌ها
+</h3>
+
+<label class="layer-row">
+<input type="checkbox" data-layer="org" checked>
+<span data-i18n="organizations">سازمان‌ها</span>
+</label>
+
+<label class="layer-row">
+<input type="checkbox" data-layer="people" checked>
+<span data-i18n="people">افراد</span>
+</label>
+
+<label class="layer-row">
+<input type="checkbox" data-layer="finance" checked>
+<span data-i18n="finance">مالی</span>
+</label>
+
+<label class="layer-row">
+<input type="checkbox" data-layer="property" checked>
+<span data-i18n="property">املاک</span>
+</label>
+
+<label class="layer-row">
+<input type="checkbox" data-layer="media" checked>
+<span data-i18n="media">رسانه</span>
+</label>
+
+<label class="layer-row">
+<input type="checkbox" data-layer="docs" checked>
+<span data-i18n="documents">اسناد</span>
+</label>
+
+</div>
+
+<div class="panel">
+
+<h3 data-i18n="evidence">
+وضعیت مدرک
+</h3>
+
+<div class="status-row">
+<span class="dot" style="background:var(--green)"></span>
+<span data-i18n="confirmed">مستند</span>
+</div>
+
+<div class="status-row">
+<span class="dot" style="background:var(--yellow)"></span>
+<span data-i18n="verify">نیازمند بررسی</span>
+</div>
+
+<div class="status-row">
+<span class="dot" style="background:var(--orange)"></span>
+<span data-i18n="lead">سرنخ تحقیقی</span>
+</div>
+
+<div class="status-row">
+<span class="dot" style="background:var(--grey)"></span>
+<span data-i18n="open">سؤال باز</span>
+</div>
+
+<div class="status-row">
+<span class="dot" style="background:var(--red)"></span>
+<span data-i18n="conflict">تعارض/اختلاف</span>
+</div>
+
+</div>
+
+</aside>
+
+<!-- NETWORK -->
+
+<main class="map">
+
+<div class="desktop-map">
+
+<div
+class="node"
+data-id="core"
+data-layer="org"
+data-status="open">
+
+<h4 data-i18n="core">
+هسته تحقیق
+</h4>
+
+<p data-i18n="coreDesc">
+نقطه شروع برای ورود به شبکه‌های سازمانی، مالی، رسانه‌ای و اسنادی.
+</p>
+
+<div class="meta">
+Global / Master
+</div>
+
+</div>
 
 
-  <div class="node" onclick="toggleNode('people')">
-    <div class="node-title">
-      <span>👤 افراد و ارتباطات</span>
-      <span class="arrow">+</span>
-    </div>
+<div
+class="node"
+data-id="europe"
+data-layer="org"
+data-status="verify">
 
-    <div id="people" class="children">
-      <div class="child">مدیران</div>
-      <div class="child">نمایندگان</div>
-      <div class="child">ارتباطات ثبت‌شده</div>
-    </div>
-  </div>
+<h4 data-i18n="europe">
+اروپا
+</h4>
 
+<p data-i18n="europeDesc">
+ورود به پرونده‌های کشورها و ارتباطات فرامرزی.
+</p>
 
-  <div class="node" onclick="toggleNode('documents')">
-    <div class="node-title">
-      <span>📄 اسناد و شواهد</span>
-      <span class="arrow">+</span>
-    </div>
+<div class="meta">
+DK · SE · NO · DE
+</div>
 
-    <div id="documents" class="children">
-      <div class="child">اسناد رسمی</div>
-      <div class="child">گزارش‌ها</div>
-      <div class="child">منابع عمومی</div>
-    </div>
-  </div>
+</div>
 
 
-  <div class="node" onclick="toggleNode('funding')">
-    <div class="node-title">
-      <span>💰 شبکه مالی</span>
-      <span class="arrow">+</span>
-    </div>
+<div
+class="node"
+data-id="media"
+data-layer="media"
+data-status="verify">
 
-    <div id="funding" class="children">
-      <div class="child">منابع مالی</div>
-      <div class="child">املاک</div>
-      <div class="child">تراکنش‌های مستند</div>
-    </div>
-  </div>
+<h4 data-i18n="media">
+رسانه
+</h4>
+
+<p data-i18n="mediaDesc">
+تلویزیون، رادیو، وب، زبان‌ها و اپراتورها.
+</p>
+
+<div class="meta">
+TV · Radio · Web
+</div>
+
+</div>
+
+
+<div
+class="node"
+data-id="finance"
+data-layer="finance"
+data-status="open">
+
+<h4 data-i18n="finance">
+مالی
+</h4>
+
+<p data-i18n="financeDesc">
+کمک‌ها، دارایی‌ها، انتقال‌ها و منابع مالی.
+</p>
+
+<div class="meta">
+Funding · Assets
+</div>
+
+</div>
+
+
+<div
+class="node"
+data-id="documents"
+data-layer="docs"
+data-status="confirmed">
+
+<h4 data-i18n="documents">
+اسناد
+</h4>
+
+<p data-i18n="documentsDesc">
+PDF، رجیسترها، گزارش‌ها و منابع اصلی.
+</p>
+
+<div class="meta">
+PDF · Registry · Reports
+</div>
+
+</div>
+
+
+<div
+class="node"
+data-id="people"
+data-layer="people"
+data-status="verify">
+
+<h4 data-i18n="people">
+افراد
+</h4>
+
+<p data-i18n="peopleDesc">
+نقش‌ها، سمت‌ها و ارتباطات مستند.
+</p>
+
+<div class="meta">
+Roles · Relations
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MOBILE DRILL DOWN -->
+
+<div class="mobile-drill">
+
+<div class="mobile-toolbar">
+
+<button id="backBtn">
+← <span data-i18n="back">بازگشت</span>
+</button>
+
+<button id="overviewBtn"
+data-i18n="overview">
+نمای کلی
+</button>
+
+</div>
+
+<div
+class="breadcrumb"
+id="breadcrumb">
+
+TRACEVERITY
+
+</div>
+
+<div id="mobileList"></div>
+
+</div>
+
+
+<!-- TIMELINE -->
+
+<div class="timeline">
+
+<div class="timeline-track"></div>
+
+<div class="timeline-labels">
+
+<span>2000</span>
+<span>2010</span>
+<span>2020</span>
+<span>2026</span>
+
+</div>
+
+</div>
 
 </main>
 
+
+<!-- DETAILS -->
+
+<aside class="details">
+
+<div class="panel">
+
+<h3 data-i18n="details">
+جزئیات
+</h3>
+
+<div
+class="detail-title"
+id="detailTitle">
+
+TRACEVERITY
+
+</div>
+
+<div
+class="detail-sub"
+id="detailSub"
+data-i18n="selectNode">
+
+یک گره را انتخاب کنید.
+
+</div>
+
+
+<div class="detail-section">
+
+<h4 data-i18n="evidence">
+وضعیت مدرک
+</h4>
+
+<span
+class="tag"
+id="detailStatus">
+
+—
+
+</span>
+
+</div>
+
+
+<div class="detail-section">
+
+<h4 data-i18n="sources">
+منابع
+</h4>
+
+<div
+id="detailSources"
+class="detail-sub">
+
+—
+
+</div>
+
+</div>
+
+
+<div class="detail-section">
+
+<h4 data-i18n="documents">
+اسناد
+</h4>
+
+<div
+id="detailDocs"
+class="detail-sub">
+
+—
+
+</div>
+
+</div>
+
+</div>
+
+</aside>
+
+</div>
+
+
 <footer>
-  TRACEVERITY • Evidence-based network research
+
+TRACEVERITY • Evidence-based research network
+
 </footer>
 
 
 <script>
-function toggleNode(id) {
-  const element = document.getElementById(id);
-  element.classList.toggle("open");
+
+/* TRANSLATIONS */
+
+const translations = {
+
+fa: {
+
+layers:"لایه‌ها",
+organizations:"سازمان‌ها",
+people:"افراد",
+finance:"مالی",
+property:"املاک",
+media:"رسانه",
+documents:"اسناد",
+
+evidence:"وضعیت مدرک",
+
+confirmed:"مستند",
+verify:"نیازمند بررسی",
+lead:"سرنخ تحقیقی",
+open:"سؤال باز",
+conflict:"تعارض/اختلاف",
+
+core:"هسته تحقیق",
+
+coreDesc:
+"نقطه شروع برای ورود به شبکه‌های سازمانی، مالی، رسانه‌ای و اسنادی.",
+
+europe:"اروپا",
+
+europeDesc:
+"ورود به پرونده‌های کشورها و ارتباطات فرامرزی.",
+
+mediaDesc:
+"تلویزیون، رادیو، وب، زبان‌ها و اپراتورها.",
+
+financeDesc:
+"کمک‌ها، دارایی‌ها، انتقال‌ها و منابع مالی.",
+
+documentsDesc:
+"PDF، رجیسترها، گزارش‌ها و منابع اصلی.",
+
+peopleDesc:
+"نقش‌ها، سمت‌ها و ارتباطات مستند.",
+
+back:"بازگشت",
+overview:"نمای کلی",
+details:"جزئیات",
+
+selectNode:
+"یک گره را انتخاب کنید.",
+
+sources:"منابع"
+
+},
+
+
+da: {
+
+layers:"Lag",
+organizations:"Organisationer",
+people:"Personer",
+finance:"Finans",
+property:"Ejendom",
+media:"Medier",
+documents:"Dokumenter",
+
+evidence:"Evidensstatus",
+
+confirmed:"Dokumenteret",
+verify:"Kræver verifikation",
+lead:"Research-spor",
+open:"Åbent spørgsmål",
+conflict:"Konflikt/uenighed",
+
+core:"Research-kernen",
+
+coreDesc:
+"Startpunkt for organisatoriske, finansielle, mediemæssige og dokumentbaserede netværk.",
+
+europe:"Europa",
+
+europeDesc:
+"Adgang til landesager og grænseoverskridende forbindelser.",
+
+mediaDesc:
+"TV, radio, web, sprog og operatører.",
+
+financeDesc:
+"Donationer, aktiver, overførsler og finansieringskilder.",
+
+documentsDesc:
+"PDF'er, registre, rapporter og primærkilder.",
+
+peopleDesc:
+"Roller, positioner og dokumenterede relationer.",
+
+back:"Tilbage",
+overview:"Oversigt",
+details:"Detaljer",
+selectNode:"Vælg en node.",
+sources:"Kilder"
+
+},
+
+
+en: {
+
+layers:"Layers",
+organizations:"Organizations",
+people:"People",
+finance:"Finance",
+property:"Property",
+media:"Media",
+documents:"Documents",
+
+evidence:"Evidence status",
+
+confirmed:"Confirmed",
+verify:"Needs verification",
+lead:"Investigative lead",
+open:"Open question",
+conflict:"Conflicting",
+
+core:"Research core",
+
+coreDesc:
+"Starting point for organizational, financial, media and documentary networks.",
+
+europe:"Europe",
+
+europeDesc:
+"Enter country cases and cross-border relationships.",
+
+mediaDesc:
+"TV, radio, web, languages and operators.",
+
+financeDesc:
+"Donations, assets, transfers and funding sources.",
+
+documentsDesc:
+"PDFs, registries, reports and primary sources.",
+
+peopleDesc:
+"Roles, positions and documented relationships.",
+
+back:"Back",
+overview:"Overview",
+details:"Details",
+selectNode:"Select a node.",
+sources:"Sources"
+
 }
+
+};
+
+
+/* MOBILE HIERARCHY */
+
+const hierarchy = {
+
+root:[
+
+{
+id:"core",
+labelKey:"core",
+layer:"org",
+status:"open"
+},
+
+{
+id:"europe",
+labelKey:"europe",
+layer:"org",
+status:"verify"
+},
+
+{
+id:"media",
+labelKey:"media",
+layer:"media",
+status:"verify"
+},
+
+{
+id:"finance",
+labelKey:"finance",
+layer:"finance",
+status:"open"
+},
+
+{
+id:"documents",
+labelKey:"documents",
+layer:"docs",
+status:"confirmed"
+}
+
+],
+
+
+europe:[
+
+{
+id:"denmark",
+label:"🇩🇰 Denmark",
+layer:"org",
+status:"confirmed"
+},
+
+{
+id:"sweden",
+label:"🇸🇪 Sweden",
+layer:"org",
+status:"verify"
+},
+
+{
+id:"norway",
+label:"🇳🇴 Norway",
+layer:"org",
+status:"open"
+},
+
+{
+id:"germany",
+label:"🇩🇪 Germany",
+layer:"org",
+status:"verify"
+}
+
+],
+
+
+denmark:[
+
+{
+id:"dk-org",
+label:"Organizations",
+layer:"org",
+status:"confirmed"
+},
+
+{
+id:"dk-people",
+label:"People",
+layer:"people",
+status:"verify"
+},
+
+{
+id:"dk-property",
+label:"Property",
+layer:"property",
+status:"confirmed"
+},
+
+{
+id:"dk-finance",
+label:"Finance",
+layer:"finance",
+status:"verify"
+},
+
+{
+id:"dk-docs",
+label:"Documents",
+layer:"docs",
+status:"confirmed"
+}
+
+],
+
+
+media:[
+
+{
+id:"tv",
+label:"Television",
+layer:"media",
+status:"verify"
+},
+
+{
+id:"radio",
+label:"Radio",
+layer:"media",
+status:"verify"
+},
+
+{
+id:"web",
+label:"Web / News",
+layer:"media",
+status:"verify"
+},
+
+{
+id:"languages",
+label:"Languages",
+layer:"media",
+status:"confirmed"
+}
+
+],
+
+
+finance:[
+
+{
+id:"donations",
+label:"Donations",
+layer:"finance",
+status:"verify"
+},
+
+{
+id:"assets",
+label:"Property / Assets",
+layer:"property",
+status:"verify"
+},
+
+{
+id:"transfers",
+label:"Transfers",
+layer:"finance",
+status:"open"
+}
+
+],
+
+
+documents:[
+
+{
+id:"official",
+label:"Official records",
+layer:"docs",
+status:"confirmed"
+},
+
+{
+id:"academic",
+label:"Academic research",
+layer:"docs",
+status:"confirmed"
+},
+
+{
+id:"media-reports",
+label:"Media reports",
+layer:"docs",
+status:"verify"
+}
+
+]
+
+};
+
+
+let lang="fa";
+
+let path=["root"];
+
+
+function t(key){
+
+return translations[lang][key] || key;
+
+}
+
+
+/* LANGUAGE */
+
+function updateLanguage(){
+
+document.documentElement.lang=lang;
+
+document.documentElement.dir=
+lang==="fa" ? "rtl" : "ltr";
+
+
+document
+.querySelectorAll("[data-i18n]")
+.forEach(el=>{
+
+el.textContent=
+t(el.dataset.i18n);
+
+});
+
+
+document
+.querySelectorAll(".lang")
+.forEach(b=>{
+
+b.classList.toggle(
+"active",
+b.dataset.lang===lang
+);
+
+});
+
+
+renderMobile();
+
+}
+
+
+document
+.querySelectorAll(".lang")
+.forEach(btn=>{
+
+btn.addEventListener(
+"click",
+()=>{
+
+lang=btn.dataset.lang;
+
+updateLanguage();
+
+});
+
+});
+
+
+/* LAYERS */
+
+document
+.querySelectorAll(
+'input[data-layer]'
+)
+.forEach(cb=>{
+
+cb.addEventListener(
+"change",
+applyLayers
+);
+
+});
+
+
+function applyLayers(){
+
+const enabled=
+[
+...document.querySelectorAll(
+'input[data-layer]:checked'
+)
+]
+.map(x=>x.dataset.layer);
+
+
+document
+.querySelectorAll(".node")
+.forEach(n=>{
+
+n.classList.toggle(
+"hidden",
+!enabled.includes(
+n.dataset.layer
+)
+);
+
+});
+
+
+renderMobile();
+
+}
+
+
+/* EYE BUTTON */
+
+document
+.getElementById("eyeBtn")
+.addEventListener(
+"click",
+()=>{
+
+document
+.querySelector(".sidebar")
+.classList.toggle("hidden");
+
+});
+
+
+/* DETAILS */
+
+const details={
+
+core:{
+title:"TRACEVERITY",
+sub:"Master research node",
+status:"open",
+sources:"—",
+docs:"—"
+},
+
+europe:{
+title:"Europe",
+sub:"Country and cross-border research layer",
+status:"verify",
+sources:"Official registries / reports",
+docs:"Country records"
+},
+
+media:{
+title:"Media",
+sub:"TV, radio, web and multilingual outreach",
+status:"verify",
+sources:"Official websites / archives",
+docs:"Media registry"
+},
+
+finance:{
+title:"Finance",
+sub:"Funding, assets and transfers",
+status:"open",
+sources:"Annual reports / registries",
+docs:"Financial records"
+},
+
+documents:{
+title:"Documents",
+sub:"Primary and secondary evidence archive",
+status:"confirmed",
+sources:"Official + academic",
+docs:"PDF / Registry / Reports"
+},
+
+people:{
+title:"People",
+sub:"Roles and relationships",
+status:"verify",
+sources:"Registries / documents",
+docs:"Person records"
+}
+
+};
+
+
+document
+.querySelectorAll(".node")
+.forEach(n=>{
+
+n.addEventListener(
+"click",
+()=>showDetails(
+n.dataset.id
+)
+);
+
+});
+
+
+function showDetails(id){
+
+const d=
+details[id] ||
+{
+title:id,
+sub:"Research node",
+status:"open",
+sources:"Pending",
+docs:"Pending"
+};
+
+
+document
+.getElementById("detailTitle")
+.textContent=d.title;
+
+
+document
+.getElementById("detailSub")
+.textContent=d.sub;
+
+
+document
+.getElementById("detailStatus")
+.textContent=d.status;
+
+
+document
+.getElementById("detailSources")
+.textContent=d.sources;
+
+
+document
+.getElementById("detailDocs")
+.textContent=d.docs;
+
+}
+
+
+/* MOBILE DRILL DOWN */
+
+function renderMobile(){
+
+const current=
+path[path.length-1];
+
+
+const children=
+hierarchy[current] || [];
+
+
+document
+.getElementById("breadcrumb")
+.textContent=
+"TRACEVERITY › "+
+path.slice(1).join(" › ");
+
+
+const list=
+document.getElementById(
+"mobileList"
+);
+
+
+list.innerHTML="";
+
+
+const enabled=
+[
+...document.querySelectorAll(
+'input[data-layer]:checked'
+)
+]
+.map(x=>x.dataset.layer);
+
+
+children
+.filter(
+x=>enabled.includes(
+x.layer
+)
+)
+.forEach(item=>{
+
+const card=
+document.createElement(
+"div"
+);
+
+
+card.className=
+"mobile-card";
+
+
+card.innerHTML=
+`
+<strong>
+${item.label || t(item.labelKey)}
+</strong>
+
+<span class="tag">
+${t(item.status) || item.status}
+</span>
+`;
+
+
+card.onclick=()=>{
+
+if(hierarchy[item.id]){
+
+path.push(item.id);
+
+renderMobile();
+
+}
+else{
+
+showDetails(item.id);
+
+}
+
+};
+
+
+list.appendChild(card);
+
+});
+
+}
+
+
+document
+.getElementById("backBtn")
+.onclick=()=>{
+
+if(path.length>1){
+
+path.pop();
+
+renderMobile();
+
+}
+
+};
+
+
+document
+.getElementById("overviewBtn")
+.onclick=()=>{
+
+path=["root"];
+
+renderMobile();
+
+};
+
+
+/* SEARCH */
+
+document
+.getElementById("search")
+.addEventListener(
+"input",
+()=>{
+
+const q=
+document
+.getElementById("search")
+.value
+.trim()
+.toLowerCase();
+
+
+document
+.querySelectorAll(".node")
+.forEach(n=>{
+
+const txt=
+n.innerText
+.toLowerCase();
+
+
+n.classList.toggle(
+"hidden",
+q &&
+!txt.includes(q)
+);
+
+});
+
+});
+
+
+updateLanguage();
+
+renderMobile();
+
 </script>
 
 </body>
