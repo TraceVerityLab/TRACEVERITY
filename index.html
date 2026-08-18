@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACEVERITY</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #07111f;
+      color: #e8eef7;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 25px 18px 15px;
+      text-align: center;
+      border-bottom: 1px solid #243448;
+    }
+
+    h1 {
+      margin: 0;
+      letter-spacing: 3px;
+      font-size: 28px;
+    }
+
+    .cyan { color: #16c7dc; }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #8998aa;
+      font-size: 14px;
+    }
+
+    .network {
+      padding: 35px 15px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .node {
+      background: #0d1a2b;
+      border: 1px solid #29415b;
+      border-radius: 12px;
+      margin: 12px 0;
+      padding: 16px;
+      cursor: pointer;
+    }
+
+    .node-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 17px;
+    }
+
+    .arrow {
+      color: #16c7dc;
+      font-size: 22px;
+    }
+
+    .children {
+      display: none;
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid #243448;
+    }
+
+    .children.open {
+      display: block;
+    }
+
+    .child {
+      background: #081522;
+      border-right: 3px solid #16c7dc;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 6px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #64758a;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>TRACE<span class="cyan">VERITY</span></h1>
+  <div class="subtitle">
+    شواهد • شبکه‌ها • اسناد • روابط
+  </div>
+</header>
+
+<main class="network">
+
+  <div class="node" onclick="toggleNode('organizations')">
+    <div class="node-title">
+      <span>🏛 سازمان‌ها و مؤسسات</span>
+      <span class="arrow">+</span>
+    </div>
+
+    <div id="organizations" class="children">
+      <div class="child">مؤسسات مذهبی</div>
+      <div class="child">سازمان‌ها</div>
+      <div class="child">شبکه‌های بین‌المللی</div>
+    </div>
+  </div>
+
+
+  <div class="node" onclick="toggleNode('people')">
+    <div class="node-title">
+      <span>👤 افراد و ارتباطات</span>
+      <span class="arrow">+</span>
+    </div>
+
+    <div id="people" class="children">
+      <div class="child">مدیران</div>
+      <div class="child">نمایندگان</div>
+      <div class="child">ارتباطات ثبت‌شده</div>
+    </div>
+  </div>
+
+
+  <div class="node" onclick="toggleNode('documents')">
+    <div class="node-title">
+      <span>📄 اسناد و شواهد</span>
+      <span class="arrow">+</span>
+    </div>
+
+    <div id="documents" class="children">
+      <div class="child">اسناد رسمی</div>
+      <div class="child">گزارش‌ها</div>
+      <div class="child">منابع عمومی</div>
+    </div>
+  </div>
+
+
+  <div class="node" onclick="toggleNode('funding')">
+    <div class="node-title">
+      <span>💰 شبکه مالی</span>
+      <span class="arrow">+</span>
+    </div>
+
+    <div id="funding" class="children">
+      <div class="child">منابع مالی</div>
+      <div class="child">املاک</div>
+      <div class="child">تراکنش‌های مستند</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  TRACEVERITY • Evidence-based network research
+</footer>
+
+
+<script>
+function toggleNode(id) {
+  const element = document.getElementById(id);
+  element.classList.toggle("open");
+}
+</script>
+
+</body>
+</html>
