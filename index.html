@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#06111e">
+  <title>TraceVerity Mobile</title>
+  <style>
+    :root{
+      --bg:#030c16;--card:#091827;--card2:#0d2132;--line:#1d4259;
+      --text:#edfbff;--muted:#93acbc;--cyan:#18d0ef;--green:#42dc86;
+      --yellow:#ffd147;--purple:#bb7cff;--pink:#ed69d8;--orange:#ff9c3b;--red:#fc626c;
+      font-family:Tahoma,Arial,sans-serif;color:var(--text)
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--bg)}
+    button,input,select{font:inherit} button{cursor:pointer}
+    button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{
+      outline:2px solid var(--cyan);outline-offset:3px
+    }
+    .app{
+      max-width:520px;min-height:100svh;margin:auto;padding:0 16px 104px;position:relative;
+      overflow:hidden;background:radial-gradient(circle at 50% -5%,#144c7566,transparent 33rem),linear-gradient(180deg,#06111e,#030b14)
+    }
+    .app:before{
+      content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;
+      background-image:linear-gradient(#9adaff18 1px,transparent 1px),linear-gradient(90deg,#9adaff18 1px,transparent 1px);
+      background-size:31px 31px;mask-image:radial-gradient(circle at 50% 25%,black,transparent 72%)
+    }
+    .top{height:82px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2}
+    .brand{display:flex;align-items:center;gap:9px;direction:ltr}
+    .mark{width:35px;height:35px;border:1px solid var(--cyan);border-radius:11px;display:grid;place-items:center;color:var(--cyan);font-size:24px;box-shadow:0 0 20px #18d0ef44}
+    .brand b{display:block;font:800 18px Arial,sans-serif;letter-spacing:.8px;line-height:1}
+    .brand em{color:var(--cyan);font-style:normal}.brand small{font-size:9px;color:#92adbd}
+    .private{border:1px solid #2a546c;border-radius:17px;background:#0a1b2a;color:#b9eaf3;padding:7px 9px;font-size:10px}
+    .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 9px var(--green);margin-left:4px}
+    .screen{position:relative;z-index:1}
+    .hero,.card,.world,.report-hero,.report-list{
+      border:1px solid var(--line);background:linear-gradient(135deg,#0b2030,#071421);
+      border-radius:17px;box-shadow:0 20px 42px #0008
+    }
+    .hero{padding:18px 20px 20px;position:relative;overflow:hidden}
+    .hero:after{content:"⌬";position:absolute;left:-18px;bottom:-47px;font-size:180px;color:#17d1ef0d}
+    h1,h2,p{margin:0}
+    .eyebrow{display:flex;align-items:center;gap:7px;font-size:10px;font-weight:bold;color:#7ee1ee;letter-spacing:.08em;margin:0 0 8px}
+    .eyebrow i{display:inline-block;width:17px;height:2px;background:var(--cyan);box-shadow:0 0 7px var(--cyan)}
+    .hero h1,.page-head h1{font-size:28px;line-height:1.36;letter-spacing:-.5px}
+    .hero h1 em{color:var(--cyan);font-style:normal}
+    .hero>p:not(.eyebrow),.page-head p:last-child{font-size:12px;line-height:1.8;color:var(--muted);max-width:300px;margin-top:9px}
+    .primary{
+      margin-top:17px;padding:10px 13px;border:1px solid #15accb;border-radius:10px;
+      background:linear-gradient(90deg,#064b67,#0f7899);color:#edffff;font-size:12px;
+      display:flex;align-items:center;justify-content:space-between;gap:20px;text-decoration:none;box-shadow:0 7px 18px #0006
+    }
+    .primary b{font-size:17px}.wide{width:100%;margin-top:11px}
+    .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:13px 0}
+    .metric{border:1px solid #1a3d52;background:linear-gradient(135deg,#0b1b2a,#07131e);border-radius:13px;padding:13px;display:grid;grid-template-columns:auto 1fr;gap:2px 9px;align-items:center}
+    .metric>span{grid-row:span 2;color:var(--tone);font-size:22px}.metric b{font-size:19px;line-height:1}.metric small{font-size:10px;color:var(--muted)}
+    .cyan{--tone:var(--cyan)}.green{--tone:var(--green)}.purple{--tone:var(--purple)}.yellow{--tone:var(--yellow)}
+    .card{padding:16px;margin-top:18px}.compact{padding-bottom:8px}
+    .heading{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}.heading h2{font-size:17px}
+    .heading button{border:0;background:transparent;color:#73deed;font-size:11px;padding:4px}
+    .radial{height:274px;position:relative}.radial:before{content:"";position:absolute;inset:28px;background:radial-gradient(circle,#1264954f,transparent 65%);filter:blur(8px);border-radius:50%}
+    .ring{position:absolute;right:50%;top:50%;translate:50% -50%;border:1px dashed #2fd6ee5b;border-radius:50%}
+    .r1{width:138px;height:138px}.r2{width:230px;height:230px;border-color:#5596b83b}
+    .hub,.node{position:absolute;font-family:inherit;cursor:pointer}
+    .hub{
+      right:50%;top:50%;translate:50% -50%;width:98px;height:98px;border:1px solid var(--cyan);border-radius:50%;
+      display:grid;place-content:center;background:radial-gradient(circle at 50% 30%,#157cac,#082237 70%);
+      box-shadow:0 0 0 6px #17ccef14,0 0 26px #17ccef58;color:var(--text);font-size:24px;z-index:3
+    }
+    .hub b{font-size:12px;line-height:1.25}
+    .node{
+      width:50px;height:50px;border-radius:50%;border:1px solid var(--tone);display:grid;place-items:center;
+      background:#0a1d2c;color:var(--tone);box-shadow:0 0 16px color-mix(in srgb,var(--tone),transparent 70%);font-size:20px;z-index:2;padding:0
+    }
+    .node small{position:absolute;top:54px;color:#a9c3d0;font-size:8px;white-space:nowrap}
+    .n1{--tone:var(--red);right:calc(50% - 25px);top:4px}.n2{--tone:var(--pink);right:calc(50% - 131px);top:50px}
+    .n3{--tone:var(--cyan);left:2px;top:139px}.n4{--tone:var(--orange);right:calc(50% - 132px);bottom:31px}
+    .n5{--tone:var(--yellow);right:calc(50% + 55px);bottom:6px}.n6{--tone:var(--purple);right:calc(50% + 137px);top:63px}
+    .radial-hint{margin:0 auto;color:var(--muted);font-size:9px;line-height:1.7;max-width:270px;text-align:center}
+    .mini,.country-row,.source{
+      width:100%;color:var(--text);text-align:right;display:flex;align-items:center;gap:9px
+    }
+    .mini{padding:11px 0;border:0;border-top:1px solid #17394e;background:transparent}.mini>span{font-size:20px}.mini>div{flex:1;display:grid;gap:3px}.mini b,.country-row b,.source b{font-size:11px}.mini small,.country-row small{font-size:9px;color:var(--muted)}
+    .mini em,.country-row em,.source em{font-style:normal;color:#76d9e8;font-size:20px}
+    .pill{border-radius:12px;padding:4px 6px;font-size:8px;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+    .pill i{width:5px;height:5px;border-radius:50%;background:currentColor}.pill.documented{color:#76efad;background:#123d2a}.pill.review{color:#ffe27a;background:#483b1a}.pill.reported{color:#ff9aa6;background:#4b212b}
+    .nav{
+      position:fixed;z-index:20;bottom:0;right:50%;translate:50% 0;max-width:520px;width:100%;height:75px;
+      padding:7px 18px max(7px,env(safe-area-inset-bottom));border-top:1px solid #17394e;background:#071421f2;backdrop-filter:blur(18px);display:flex;justify-content:space-between
+    }
+    .nav button{border:0;background:transparent;color:#6f8d9f;width:56px;display:grid;place-content:center;gap:3px}.nav button span{font-size:21px;line-height:1}.nav button small{font-size:9px}.nav button.active{color:var(--cyan)}
+    .fab{position:fixed;z-index:25;bottom:90px;right:calc(50% - min(210px,calc(50vw - 20px)));width:48px;height:48px;border:1px solid #2acbea;border-radius:50%;background:linear-gradient(135deg,#0b8fb3,#07566f);color:#fff;font-size:31px;line-height:1;box-shadow:0 9px 24px #0008}
+    .page-head{padding:11px 1px 17px;display:flex;justify-content:space-between;gap:10px}.page-head>button{width:39px;height:39px;border:1px solid #2c8bab;border-radius:10px;background:#0b2e3e;color:#d6fcff;font-size:23px}
+    .search{height:47px;border:1px solid #234c63;background:#081827;border-radius:10px;padding:0 12px;display:flex;align-items:center;gap:9px;color:#76a2b6}.search span{font-size:22px}.search input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font-size:11px}.search input::placeholder{color:#7691a1}
+    .chips,.category-strip,.filter-row{display:flex;gap:7px;overflow:auto;padding:12px 0;scrollbar-width:none}.chips::-webkit-scrollbar,.category-strip::-webkit-scrollbar,.filter-row::-webkit-scrollbar{display:none}
+    .chips button,.category-strip button,.filter-row>button{flex:none;border:1px solid #21465b;border-radius:18px;background:#091827;color:#a4bdca;padding:7px 10px;font-size:10px}.chips button.active,.category-strip button.active,.filter-row>button.active{border-color:var(--cyan);background:#0b4055;color:#ecffff}
+    .world{height:231px;overflow:hidden;position:relative;background:radial-gradient(circle at 58% 38%,#134e7066,transparent 32%),#061520}
+    .grid{position:absolute;inset:0;background-image:linear-gradient(#7acfff0d 1px,transparent 1px),linear-gradient(90deg,#7acfff0d 1px,transparent 1px);background-size:19px 19px}
+    .land{position:absolute;background:#36566c;border:1px solid #4c7288;opacity:.72;border-radius:48% 52% 42% 58% / 43% 35% 65% 57%}.a{width:86px;height:47px;left:-10px;top:43px;rotate:14deg}.b{width:49px;height:86px;left:61px;top:103px;rotate:-23deg}.c{width:105px;height:54px;right:91px;top:39px;rotate:-8deg}.d{width:68px;height:84px;right:120px;top:105px;rotate:21deg}
+    .focus{position:absolute;width:137px;height:137px;right:55px;top:35px;border:1px solid var(--cyan);border-radius:50%;box-shadow:0 0 0 7px #18d0ef11,0 0 28px #18d0ef2c}
+    .pin{position:absolute;width:31px;height:31px;border:1px solid #7beaf5;border-radius:50%;background:#0d2e42;display:grid;place-items:center;font-size:16px;box-shadow:0 0 15px #18d0ef65;padding:0}.pin small{font:700 8px Arial,sans-serif;color:#c6faff}.pin.active{border-color:#fff;background:#155575;box-shadow:0 0 0 4px #18d0ef30,0 0 18px #18d0ef88;scale:1.12}
+    .dk{right:113px;top:72px}.se{right:93px;top:52px}.no{right:129px;top:53px}.de{right:105px;top:96px}
+    .map-label{position:absolute;bottom:11px;left:11px;right:11px;border:1px solid #1e4b62;border-radius:8px;background:#071a28e8;padding:8px 9px;display:flex;align-items:center;gap:6px;color:#a5c1ce;font-size:9px}.map-label b{margin-right:auto;color:#ecfcff}
+    .results{margin-top:13px;padding:14px}.country-row{margin-top:8px;padding:10px;border:1px solid #1a3c50;border-radius:10px;background:#091827}.country-row>span{font-size:22px}.country-row>div{display:grid;gap:4px;flex:1}
+    .note{display:flex;align-items:flex-start;gap:8px;margin:12px 4px;color:var(--muted);font-size:10px;line-height:1.7}.note i{width:16px;height:16px;flex:none;border:1px solid #4d839b;border-radius:50%;display:grid;place-items:center;color:#91eff9;font-style:normal}
+    .active-path{margin-top:10px;padding:9px 10px;border:1px solid #24576d;border-radius:9px;background:#092334;display:flex;align-items:center;justify-content:space-between;gap:9px;color:#a4d7e1;font-size:10px}.active-path b{color:#ecffff}.active-path button{border:0;background:transparent;color:#75dcea;font-size:9px;padding:3px}
+    .status-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:12px 0}.status-summary>div{border:1px solid #1d4258;background:#081725;border-radius:10px;padding:9px;display:grid;gap:7px}.status-summary b{font-size:18px}
+    .source-list{display:grid;gap:9px}.source{padding:12px;border:1px solid #1b4055;border-radius:12px;background:linear-gradient(135deg,#0a1a29,#081522)}.source-icon{width:38px;height:38px;flex:none;border:1px solid currentColor;border-radius:9px;display:grid;place-items:center;color:var(--cyan);font-size:19px}.source-icon.review{color:var(--yellow)}.source-icon.reported{color:var(--red)}.source>div{flex:1;min-width:0}.source>div>div{display:flex;align-items:flex-start;gap:6px}.source p{margin-top:4px;color:#a0b8c5;font-size:9px}.source p i{font-style:normal;color:#567182}.source small{display:block;margin-top:5px;font-size:9px;color:#6cd7e8}
+    .integrity{margin-top:13px;padding:13px;border:1px solid #4d4421;border-radius:13px;background:linear-gradient(135deg,#211d0f,#11180f);display:flex;gap:10px}.integrity>span{color:var(--yellow);font-size:20px}.integrity b{font-size:11px}.integrity p{margin-top:4px;color:#c0c9aa;font-size:10px;line-height:1.75}
+    .report-hero{padding:19px;display:flex;align-items:center;gap:18px}.donut{width:122px;height:122px;flex:none;border-radius:50%;display:grid;place-items:center;position:relative}.donut:after{content:"";position:absolute;inset:13px;background:#0a1a29;border-radius:50%;box-shadow:inset 0 0 18px #0007}.donut>div{z-index:1;text-align:center;display:grid;gap:3px}.donut b{font:700 24px Arial,sans-serif}.donut small{font-size:9px;color:var(--muted)}.report-hero h2{font-size:16px;line-height:1.6}
+    .outline{margin-top:10px;border:1px solid #34748d;border-radius:8px;background:#0c2635;color:#c1f4fb;font-size:10px;padding:8px 9px}.report-list{padding:13px;margin-top:12px}.report{padding:8px 0;border-bottom:1px solid #17394d;display:flex;align-items:center;gap:8px;font-size:11px}.report:last-child{border:0}.report>i{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px currentColor}.report>i.documented{background:var(--green)}.report>i.review{background:var(--yellow)}.report>i.reported{background:var(--red)}.report>span{flex:1;height:4px;border-radius:4px;background:#19394d}.report strong{font-size:16px}
+    .timeline{margin-top:12px}.step{position:relative;display:flex;gap:10px;padding:10px 0}.step:not(:last-child):after{content:"";position:absolute;right:13px;top:33px;width:1px;height:27px;background:#29576d}.step>i{width:27px;height:27px;z-index:1;display:grid;place-items:center;flex:none;border:1px solid #3d7790;border-radius:50%;background:#0c2131;color:#a2dbe6;font-size:10px;font-style:normal}.step>i.done{border-color:var(--green);color:#87f6b8}.step b{font-size:11px;display:block}.step small{display:block;margin-top:3px;color:var(--muted);font-size:9px}
+    .empty{padding:30px 12px;border:1px dashed #32647c;border-radius:11px;display:grid;place-items:center;gap:5px;color:#9ab3c1;text-align:center}.empty span{color:var(--cyan);font-size:23px}.empty b{font-size:12px}.empty small{font-size:10px}.empty button{margin-top:6px;border:1px solid #30728b;border-radius:7px;background:#0c2b3b;color:#bff4fa;padding:7px 9px;font-size:10px}
+    .overlay{position:fixed;z-index:50;inset:0;display:flex;justify-content:center;align-items:flex-end}.scrim{position:absolute;inset:0;border:0;background:#000b;backdrop-filter:blur(4px)}.sheet{position:relative;z-index:1;width:min(520px,100%);max-height:88svh;overflow:auto;padding:19px 19px max(22px,env(safe-area-inset-bottom));border:1px solid #2c637c;border-bottom:0;border-radius:21px 21px 0 0;background:linear-gradient(145deg,#10283a,#071522 63%);box-shadow:0 -20px 50px #000b}.grab{display:block;width:38px;height:4px;border-radius:5px;background:#537c8e;margin:0 auto 15px}.x{position:absolute;left:15px;top:14px;width:27px;height:27px;border:1px solid #355f74;border-radius:50%;background:#102b3b;color:#d0eef4;font-size:19px}.sheet-top{display:flex;align-items:center;gap:5px;color:#b4ceda;font-size:10px}.sheet-top>span{font-size:18px}.sheet-top .pill{margin-right:auto}.sheet h2{font-size:21px;line-height:1.5;margin-top:8px;padding-left:29px}.sheet>p:not(.eyebrow){margin-top:9px;color:#a0b8c5;font-size:11px;line-height:1.9}.sheet-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:15px 0}.sheet-stats>div{padding:10px;border:1px solid #1f485e;border-radius:9px;background:#091a29;text-align:center}.sheet-stats b{display:block;min-height:18px;font-size:16px}.sheet-stats small{display:block;margin-top:4px;color:var(--muted);font-size:9px}.origin{padding:10px;border:1px solid #1e4c62;border-radius:10px;background:#071927;display:flex;align-items:center;gap:9px}.origin>span{font-size:21px;color:var(--cyan)}.origin small{display:block;color:#83a8b9;font-size:9px}.origin b{display:block;margin-top:3px;font-size:11px}.evidence-route{margin-top:13px;padding:9px;border:1px dashed #2c6379;border-radius:9px;background:#071725;display:flex;align-items:center;gap:5px;overflow:auto;white-space:nowrap;color:#93b1bf;font-size:9px}.evidence-route b{color:#d9f7fb;font-size:9px}.evidence-route i{font-style:normal;color:var(--cyan);font-size:13px}.warning{display:block;text-align:center;margin-top:13px;color:#8eaab9;font-size:9px}
+    .form-sheet form{display:grid;gap:11px;margin-top:15px}.form-sheet form label{display:grid;gap:6px;color:#c0dbe5;font-size:10px}.form-sheet input,.form-sheet select{height:41px;border:1px solid #29566d;border-radius:8px;outline:0;background:#081927;color:var(--text);padding:0 10px;font-size:11px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .toast{position:fixed;z-index:70;bottom:100px;right:50%;translate:50% 90px;padding:10px 13px;border:1px solid #408caa;border-radius:9px;background:#103a4e;color:#ecffff;font-size:10px;box-shadow:0 10px 25px #0009;transition:translate .25s;white-space:nowrap}.toast.show{translate:50% 0}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <div class="brand"><span class="mark">⌬</span><div><b>TRACE<em>VERITY</em></b><small>شواهد • روابط • اسناد</small></div></div>
+      <button class="private" id="private"><i class="dot"></i> خصوصی</button>
+    </header>
+
+    <section class="screen" id="screen"></section>
+    <button class="fab" id="add" aria-label="افزودن لینک">+</button>
+
+    <nav class="nav">
+      <button data-tab="home"><span>⌂</span><small>خانه</small></button>
+      <button data-tab="map"><span>⌬</span><small>نقشه</small></button>
+      <button data-tab="sources"><span>⌕</span><small>منابع</small></button>
+      <button data-tab="report"><span>▤</span><small>گزارش</small></button>
+    </nav>
+
+    <div id="modal"></div>
+    <div class="toast" id="toast" role="status"></div>
+  </main>
+
+  <script>
+    const flags={دانمارک:"🇩🇰",سوئد:"🇸🇪",نروژ:"🇳🇴",آلمان:"🇩🇪",اروپا:"🇪🇺"};
+    const labels={documented:"دارای سند",review:"در حال بررسی",reported:"گزارش‌شده"};
+    const cats={
+      نهادها:"◈",افراد:"♟",اسناد:"▤",دارایی:"¤",رسانه:"◉",آموزش:"⌂"
+    };
+
+    const starter=[
+      {id:"DK-01",title:"ثبت‌های عمومی و سازمان‌ها",country:"دانمارک",category:"نهادها",status:"documented",source:"CVR / Virk",url:"https://datacvr.virk.dk/",docs:12,links:8,people:4,date:"به‌روزرسانی رسمی",note:"مسیر بررسی: نام حقوقی، شمارهٔ ثبت، آدرس و تاریخ نسخهٔ دریافتی."},
+      {id:"DK-02",title:"املاک و دارایی‌های ثبت‌شده",country:"دانمارک",category:"دارایی",status:"review",source:"Tinglysning",url:"https://www.tinglysning.dk/",docs:7,links:6,people:2,date:"نیازمند تطبیق سند",note:"مالکیت، شمارهٔ ملک و تاریخ سند را جداگانه ثبت و پیش از نتیجه‌گیری تطبیق بده."},
+      {id:"DK-03",title:"اسناد مالی و سالانه",country:"دانمارک",category:"اسناد",status:"documented",source:"Virk Regnskaber",url:"https://datacvr.virk.dk/",docs:10,links:5,people:3,date:"نسخهٔ بایگانی‌شده",note:"برای هر فایل، تاریخ دانلود و نسخهٔ اصلی را نگه دار."},
+      {id:"DK-04",title:"نقش‌ها و نمایندگی‌های ثبت‌شده",country:"دانمارک",category:"افراد",status:"review",source:"CVR / Virk",url:"https://datacvr.virk.dk/",docs:4,links:6,people:5,date:"نیازمند تطبیق نقش",note:"فقط نقش‌های ثبت‌شده و منبع اصلی را ثبت کن؛ تشابه نام به‌تنهایی کافی نیست."},
+      {id:"SE-01",title:"ثبت‌های نهادی سوئد",country:"سوئد",category:"نهادها",status:"documented",source:"Bolagsverket",url:"https://bolagsverket.se/",docs:9,links:5,people:3,date:"ثبت رسمی",note:"برای تطبیق نام نهادها با ثبت رسمی کشور و شمارهٔ سازمانی استفاده می‌شود."},
+      {id:"SE-02",title:"پوشش رسانه‌ای و آرشیو",country:"سوئد",category:"رسانه",status:"reported",source:"Sveriges Radio",url:"https://www.sverigesradio.se/",docs:4,links:3,people:1,date:"گزارش ثانوی",note:"گزارش رسانه‌ای مسیر بررسی است؛ به‌تنهایی اثبات رابطه یا ادعا نیست."},
+      {id:"NO-01",title:"ثبت و گزارش‌های نروژ",country:"نروژ",category:"اسناد",status:"review",source:"Brønnøysundregistrene",url:"https://www.brreg.no/",docs:6,links:4,people:2,date:"در صف بررسی",note:"سند، گزارش و برداشت تحلیلی را جدا نگه دار تا مسیر قابل بازبینی بماند."},
+      {id:"DE-01",title:"منابع ثبت و گزارش آلمان",country:"آلمان",category:"اسناد",status:"reported",source:"Bundesanzeiger",url:"https://www.bundesanzeiger.de/",docs:5,links:3,people:1,date:"منبع ثانوی",note:"هر پیوند باید با منبع اصلی یا نسخهٔ رسمی تکمیل شود."},
+      {id:"EU-01",title:"برنامه‌ها و شبکه‌های آموزشی",country:"اروپا",category:"آموزش",status:"review",source:"EU Transparency Register",url:"https://transparency-register.europa.eu/",docs:3,links:7,people:5,date:"نیازمند تأیید",note:"نام برنامه، برگزارکننده و سند مرجع را در یک کارت جدا ثبت کن."}
+    ];
+
+    let saved=[];
+    try{saved=JSON.parse(localStorage.getItem("traceverity.github.links")||"[]")}catch(e){}
+    let items=[...starter,...saved];
+    let state={tab:"home",country:"همه",category:"همه",status:"همه",query:""};
+
+    const $=s=>document.querySelector(s);
+    const screen=$("#screen"),modal=$("#modal");
+
+    const validUrl=value=>{
+      try{
+        const url=new URL(value);
+        return ["https:","http:"].includes(url.protocol)?url.href:null;
+      }catch(e){return null}
+    };
+
+    const safe=value=>String(value).replace(/[&<>"']/g,char=>({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[char]));
+
+    const pill=status=>`<span class="pill ${status}"><i></i>${labels[status]}</span>`;
+
+    function filtered(ignoreStatus=false){
+      return items.filter(item=>{
+        const text=`${item.title} ${item.source} ${item.country} ${item.category}`.toLowerCase();
+        return (state.country==="همه"||item.country===state.country) &&
+          (state.category==="همه"||item.category===state.category) &&
+          (ignoreStatus||state.status==="همه"||item.status===state.status) &&
+          text.includes(state.query.trim().toLowerCase());
+      });
+    }
+
+    function heading(top,title,action=""){
+      return `<header class="heading"><div><p class="eyebrow"><i></i>${top}</p><h2>${title}</h2></div>${action?`<button data-action="${action}">${action==="map"?"نقشه ←":"پاک‌کردن"}</button>`:""}</header>`;
+    }
+
+    function search(placeholder){
+      return `<label class="search"><span>⌕</span><input id="query" value="${safe(state.query)}" placeholder="${placeholder}"></label>`;
+    }
+
+    function empty(){
+      return `<div class="empty"><span>⌕</span><b>چیزی پیدا نشد</b><small>فیلتر یا جست‌وجو را تغییر بده.</small><button data-action="reset">نمایش همهٔ کارت‌ها</button></div>`;
+    }
+
+    function home(){
+      const docs=items.reduce((sum,item)=>sum+item.docs,0);
+      const nodes=Object.keys(cats).map((name,index)=>
+        `<button class="node n${index+1}" data-category="${name}"><span>${cats[name]}</span><small>${name}</small></button>`
+      ).join("");
+
+      screen.innerHTML=`
+        <section class="hero">
+          <p class="eyebrow"><i></i>فضای تحقیق تعاملی</p>
+          <h1>نقشهٔ تحقیق<br>در <em>جیب شما</em></h1>
+          <p>با لمس هر بخش، منابع، وضعیت مدرک و رابطه‌های نیازمند بررسی را باز کن.</p>
+          <button class="primary" data-go="map">باز کردن نقشه <b>←</b></button>
+        </section>
+
+        <section class="metrics">
+          <article class="metric cyan"><span>◎</span><b>${new Set(items.map(item=>item.country)).size}</b><small>کشور و حوزه</small></article>
+          <article class="metric green"><span>▦</span><b>${items.length}</b><small>رکورد واقعی</small></article>
+          <article class="metric purple"><span>▤</span><b>${docs}</b><small>سند نمونه</small></article>
+          <article class="metric yellow"><span>↗</span><b>${items.filter(item=>validUrl(item.url)).length}</b><small>لینک زنده</small></article>
+        </section>
+
+        <section class="card">
+          ${heading("هستهٔ شبکه","از کجا شروع کنیم؟","map")}
+          <div class="radial">
+            <i class="ring r1"></i><i class="ring r2"></i>
+            <button class="hub" data-go="map">⌬<b>شبکهٔ<br>پژوهش</b></button>
+            ${nodes}
+          </div>
+          <p class="radial-hint">هر گره یک مسیر مستقل دارد؛ داده‌ها فقط با منبع و وضعیت بررسی نمایش داده می‌شوند.</p>
+        </section>
+
+        <section class="card compact">
+          ${heading("تازه‌ترین‌ها","کارت‌های پژوهش")}
+          ${items.slice(0,3).map(item=>`
+            <button class="mini" data-item="${item.id}">
+              <span>${flags[item.country]}</span>
+              <div><b>${safe(item.title)}</b><small>${safe(item.source)} • ${item.docs} سند</small></div>
+              ${pill(item.status)}<em>←</em>
+            </button>
+          `).join("")}
+        </section>`;
+    }
+
+    function map(){
+      const list=filtered();
+      const countries=["همه","دانمارک","سوئد","نروژ","آلمان","اروپا"];
+      const count=country=>items.filter(item=>item.country===country).length;
+      const active=[state.country!=="همه"?state.country:"",state.category!=="همه"?state.category:"",state.status!=="همه"?labels[state.status]:""].filter(Boolean).join(" • ");
+
+      screen.innerHTML=`
+        <section class="page-head">
+          <div><p class="eyebrow"><i></i>جغرافیا و روابط</p><h1>نقشهٔ موبایلی</h1><p>کشور یا موضوع را انتخاب کن؛ هر گره، منبع‌ها و کارت‌های مربوط را باز می‌کند.</p></div>
+        </section>
+
+        ${search("جست‌وجوی موضوع، کشور یا منبع…")}
+
+        <div class="chips">
+          ${countries.map(country=>`<button class="${state.country===country?"active":""}" data-country="${country}">${country==="همه"?country:`${flags[country]} ${country}`}</button>`).join("")}
+        </div>
+
+        <section class="world">
+          <div class="grid"></div><div class="land a"></div><div class="land b"></div><div class="land c"></div><div class="land d"></div><i class="focus"></i>
+          ${["دانمارک","سوئد","نروژ","آلمان"].map((country,i)=>`<button class="pin ${["dk","se","no","de"][i]} ${state.country===country?"active":""}" data-country="${country}">${flags[country]}<small>${count(country)}</small></button>`).join("")}
+          <div class="map-label"><i class="dot"></i>${active||"همهٔ حوزه‌های پژوهش"}<b>${list.length} رکورد قابل کاوش</b></div>
+        </section>
+
+        <div class="category-strip">
+          <button class="${state.category==="همه"?"active":""}" data-category="همه">همه</button>
+          ${Object.keys(cats).map(name=>`<button class="${state.category===name?"active":""}" data-category="${name}"><span>${cats[name]}</span>${name}</button>`).join("")}
+        </div>
+
+        <section class="card results">
+          ${heading(active||"همهٔ حوزه‌ها",`${list.length} گره قابل کاوش`,(active||state.query)?"reset":"")}
+          ${list.map(item=>`
+            <button class="country-row" data-item="${item.id}">
+              <span>${flags[item.country]}</span>
+              <div><b>${safe(item.title)}</b><small>${item.category} • ${item.docs} سند • ${item.links} رابطه</small></div>
+              ${pill(item.status)}<em>‹</em>
+            </button>
+          `).join("")||empty()}
+        </section>
+
+        <p class="note"><i>i</i>رنگ و وضعیت کارت، درجهٔ بررسی را نشان می‌دهد؛ نه اثبات قطعی یک ادعا.</p>`;
+    }
+
+    function sources(){
+      const list=filtered(),scope=filtered(true);
+
+      screen.innerHTML=`
+        <section class="page-head">
+          <div><p class="eyebrow"><i></i>منابع زنده</p><h1>سند، لینک، مسیر</h1><p>روی هر کارت بزن تا منبع اصلی و مسیر بررسی آن باز شود.</p></div>
+          <button data-action="add">+</button>
+        </section>
+
+        ${search("جست‌وجو در همهٔ منابع…")}
+
+        <div class="filter-row">
+          <button class="${state.country==="همه"?"active":""}" data-country="همه">همهٔ کشورها</button>
+          ${["documented","review","reported"].map(status=>`<button class="${state.status===status?"active":""}" data-status="${status}">${pill(status)}</button>`).join("")}
+        </div>
+
+        ${state.category!=="همه"?`<div class="active-path"><span>${cats[state.category]} مسیر فعال: <b>${state.category}</b></span><button data-category="همه">× حذف فیلتر</button></div>`:""}
+
+        <section class="status-summary">
+          ${["documented","review","reported"].map(status=>`<div>${pill(status)}<b>${scope.filter(item=>item.status===status).length}</b></div>`).join("")}
+        </section>
+
+        <section class="source-list">
+          ${list.map(item=>`
+            <button class="source" data-item="${item.id}">
+              <span class="source-icon ${item.status}">▤</span>
+              <div>
+                <div><b>${safe(item.title)}</b>${pill(item.status)}</div>
+                <p>${safe(item.source)} <i>•</i> ${item.country} <i>•</i> ${safe(item.date)}</p>
+                <small>↗ لینک زنده و جزئیات بررسی</small>
+              </div>
+              <em>‹</em>
+            </button>
+          `).join("")||empty()}
+        </section>
+
+        <section class="integrity">
+          <span>⚖</span>
+          <div><b>قاعدهٔ کار TraceVerity</b><p>هم‌زمانی، نام مشترک یا یک گزارش به‌تنهایی اثبات رابطه نیست. منبع، تاریخ و نسخه را نگه دار.</p></div>
+        </section>`;
+    }
+
+    function report(){
+      const documented=items.filter(item=>item.status==="documented").length;
+      const review=items.filter(item=>item.status==="review").length;
+      const reported=items.filter(item=>item.status==="reported").length;
+      const total=Math.max(items.length,1);
+      const percent=Math.round(documented/total*100);
+      const docs=items.reduce((sum,item)=>sum+item.docs,0);
+      const row=(status,text,count)=>`<div class="report"><i class="${status}"></i><b>${text}</b><span></span><strong>${count}</strong></div>`;
+
+      screen.innerHTML=`
+        <section class="page-head">
+          <div><p class="eyebrow"><i></i>مرور وضعیت</p><h1>گزارش پژوهش</h1><p>یک نگاه سریع به آن‌چه مستند است و آن‌چه هنوز نیاز به کار دارد.</p></div>
+        </section>
+
+        <section class="report-hero">
+          <div class="donut" style="background:conic-gradient(var(--green) 0 ${percent}%,var(--yellow) ${percent}% ${percent+review/total*100}%,var(--red) 0)">
+            <div><b>${percent}%</b><small>دارای سند</small></div>
+          </div>
+          <div><p class="eyebrow"><i></i>وضعیت اطلاعات</p><h2>پیش از انتشار، دوباره بررسی کن.</h2><button class="outline" data-go="map">بازگشت به نقشه ←</button></div>
+        </section>
+
+        <section class="report-list">
+          ${row("documented","دارای سند",documented)}
+          ${row("review","در حال بررسی",review)}
+          ${row("reported","گزارش‌شده",reported)}
+          ${row("live","کل سند نمونه",docs)}
+        </section>
+
+        <section class="card timeline">
+          ${heading("خط زمان","مرحله‌های پیشنهادی")}
+          ${["ثبت منبع اصلی","افزودن مدرک و نسخه","بررسی رابطه و پاسخ","گزارش قابل انتشار"].map((text,index)=>`
+            <div class="step"><i class="${index===0?"done":""}">${index+1}</i><div><b>${text}</b><small>${index===0?"برای هر موضوع یک منبعِ تاریخ‌دار ثبت کن.":"بعد از کامل شدن مرحلهٔ پیش برو جلو."}</small></div></div>
+          `).join("")}
+        </section>`;
+    }
+
+    function detail(item){
+      const url=validUrl(item.url);
+      modal.innerHTML=`
+        <div class="overlay">
+          <button class="scrim" data-close></button>
+          <section class="sheet">
+            <i class="grab"></i><button class="x" data-close>×</button>
+            <div class="sheet-top"><span>${flags[item.country]}</span>${item.country}${pill(item.status)}</div>
+            <h2>${safe(item.title)}</h2>
+            <p>${safe(item.note)}</p>
+
+            <div class="evidence-route"><span>کشور</span><b>${item.country}</b><i>←</i><span>دسته</span><b>${item.category}</b><i>←</i><span>کارت</span></div>
+
+            <div class="sheet-stats">
+              <div><b>${item.docs}</b><small>مدرک</small></div>
+              <div><b>${item.links}</b><small>رابطه</small></div>
+              <div><b>${item.people||0}</b><small>فرد/نقش</small></div>
+            </div>
+
+            <div class="origin"><span>↗</span><div><small>منبع اصلی • ${safe(item.date)}</small><b>${safe(item.source)}</b></div></div>
+            <button class="outline wide" data-explore="${item.id}">نمایش این مسیر در نقشه ←</button>
+            ${url?`<a class="primary wide" href="${url}" target="_blank" rel="noopener">باز کردن لینک زنده <b>↗</b></a>`:`<button class="primary wide" disabled>لینک قابل استفاده نیست</button>`}
+            <small class="warning">این کارت یک مسیر پژوهش است، نه اثبات یک ادعا.</small>
+          </section>
+        </div>`;
+    }
+
+    function addForm(){
+      modal.innerHTML=`
+        <div class="overlay">
+          <button class="scrim" data-close></button>
+          <section class="sheet form-sheet">
+            <i class="grab"></i><button class="x" data-close>×</button>
+            <p class="eyebrow"><i></i>منبع جدید</p>
+            <h2>لینک زنده اضافه کن</h2>
+            <p>این لینک فقط در مرورگر همین گوشی ذخیره می‌شود؛ بعداً می‌توانیم آن را به پایگاه‌دادهٔ اصلی وصل کنیم.</p>
+
+            <form id="addForm">
+              <label>نام یا عنوان<input required name="title" placeholder="مثلاً ثبت رسمی…"></label>
+              <label>لینک منبع<input required name="url" inputmode="url" placeholder="https://…"></label>
+              <div class="form-grid">
+                <label>کشور<select name="country">${Object.keys(flags).map(country=>`<option>${country}</option>`).join("")}</select></label>
+                <label>دسته<select name="category">${Object.keys(cats).map(category=>`<option ${category==="اسناد"?"selected":""}>${category}</option>`).join("")}</select></label>
+              </div>
+              <label>یادداشت کوتاه (اختیاری)<input name="note" placeholder="چه چیزی را باید بررسی کنیم؟"></label>
+              <button class="primary wide" type="submit">افزودن به منابع <b>+</b></button>
+            </form>
+          </section>
+        </div>`;
+
+      $("#addForm").onsubmit=event=>{
+        event.preventDefault();
+        const form=new FormData(event.target);
+        const title=String(form.get("title")||"").trim();
+        const url=validUrl(String(form.get("url")||"").trim());
+
+        if(!title||!url){
+          say("نام و یک لینک معتبر https:// وارد کن.");
+          return;
+        }
+
+        const item={
+          id:"MY-"+Date.now(),
+          title,
+          country:String(form.get("country")),
+          category:String(form.get("category")),
+          status:"review",
+          source:"لینک شخصی",
+          url,
+          docs:1,
+          links:0,
+          people:0,
+          date:"افزوده‌شده در این دستگاه",
+          note:String(form.get("note")||"این لینک در گوشی شما ذخیره شد و پیش از نتیجه‌گیری نیاز به بررسی دارد.")
+        };
+
+        saved.push(item);
+        items=[...starter,...saved];
+        localStorage.setItem("traceverity.github.links",JSON.stringify(saved));
+
+        modal.innerHTML="";
+        state.country=item.country;
+        state.category="همه";
+        state.status="همه";
+        state.query="";
+        state.tab="sources";
+        render();
+        say("لینک به فهرست منابع اضافه شد.");
+      };
+    }
+
+    function render(){
+      document.querySelectorAll("[data-tab]").forEach(button=>{
+        button.classList.toggle("active",button.dataset.tab===state.tab);
+      });
+
+      ({home,map,sources,report})[state.tab]();
+    }
+
+    document.addEventListener("click",event=>{
+      const target=event.target.closest("button,[data-go],[data-item]");
+      if(!target)return;
+
+      if(target.dataset.close){
+        modal.innerHTML="";
+        return;
+      }
+
+      if(target.dataset.tab){
+        state.tab=target.dataset.tab;
+        render();
+        return;
+      }
+
+      if(target.dataset.go){
+        state.tab=target.dataset.go;
+        render();
+        return;
+      }
+
+      if(target.dataset.country){
+        state.country=target.dataset.country;
+        if(state.tab==="home")state.tab="map";
+        render();
+        return;
+      }
+
+      if(target.dataset.category!==undefined){
+        state.category=target.dataset.category;
+        state.status="همه";
+        if(state.tab==="home")state.tab="map";
+        render();
+        return;
+      }
+
+      if(target.dataset.status){
+        state.status=state.status===target.dataset.status?"همه":target.dataset.status;
+        render();
+        return;
+      }
+
+      if(target.dataset.action==="add"){
+        addForm();
+        return;
+      }
+
+      if(target.dataset.action==="reset"){
+        state={...state,country:"همه",category:"همه",status:"همه",query:""};
+        render();
+        return;
+      }
+
+      if(target.dataset.explore){
+        const item=items.find(entry=>entry.id===target.dataset.explore);
+        state.country=item.country;
+        state.category=item.category;
+        state.status="همه";
+        state.query="";
+        state.tab="map";
+        modal.innerHTML="";
+        render();
+        return;
+      }
+
+      if(target.dataset.item){
+        const item=items.find(entry=>entry.id===target.dataset.item);
+        if(item)detail(item);
+      }
+    });
+
+    screen.addEventListener("input",event=>{
+      if(event.target.id==="query"){
+        state.query=event.target.value;
+        render();
+        requestAnimationFrame(()=>{
+          const field=$("#query");
+          if(field){
+            field.focus();
+            field.setSelectionRange(state.query.length,state.query.length);
+          }
+        });
+      }
+    });
+
+    $("#add").onclick=addForm;
+    $("#private").onclick=()=>say("این نمونه در فضای تحقیق خصوصی است.");
+
+    let timer;
+    function say(text){
+      const toast=$("#toast");
+      toast.textContent=text;
+      toast.classList.add("show");
+      clearTimeout(timer);
+      timer=setTimeout(()=>toast.classList.remove("show"),2600);
+    }
+
+    render();
+  </script>
+</body>
+</html>
