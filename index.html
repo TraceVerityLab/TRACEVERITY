@@ -2,560 +2,555 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>TRACEVERITY</title>
 
 <style>
 :root{
   --bg:#06111f;
-  --panel:#0b1a2b;
-  --panel2:#0e2034;
-  --line:#29445f;
-  --cyan:#14c8e2;
-  --blue:#289cff;
-  --green:#41d58a;
-  --yellow:#f5c744;
-  --orange:#f49a3f;
-  --purple:#a771ff;
-  --red:#ef5565;
-  --text:#edf4fc;
-  --muted:#8799ac;
+  --panel:#0a1929;
+  --panel2:#0d2034;
+  --line:#294761;
+  --cyan:#16c7dc;
+  --green:#40d58a;
+  --purple:#a66cff;
+  --red:#f05a63;
+  --blue:#379cf4;
+  --yellow:#f3c542;
+  --orange:#ff944d;
+  --text:#eef5ff;
+  --muted:#899bad;
 }
 
 *{box-sizing:border-box}
 
 html,body{
   margin:0;
-  padding:0;
+  min-height:100%;
   background:
-    radial-gradient(circle at 50% 5%,#0d2841 0%,#06111f 38%);
+    radial-gradient(circle at 50% 0,#10283f 0,#06111f 34%);
   color:var(--text);
   font-family:Arial,Tahoma,sans-serif;
-  min-height:100%;
 }
 
-body{
-  padding-bottom:40px;
-}
+body{padding-bottom:35px}
 
-button{
-  font-family:inherit;
-  cursor:pointer;
-}
+button{font-family:inherit}
 
-/* HEADER */
+/* ---------- HEADER ---------- */
 
-.header{
+header{
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:50;
   background:rgba(6,17,31,.96);
   backdrop-filter:blur(12px);
-  border-bottom:1px solid #20364c;
+  border-bottom:1px solid #223b53;
   padding:
     calc(12px + env(safe-area-inset-top))
-    14px
-    12px;
+    14px 13px;
 }
 
-.header-top{
+.header-row{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
+  gap:8px;
 }
 
-.brand{
+.logo{
   direction:ltr;
-  font-size:24px;
   font-weight:900;
-  letter-spacing:3px;
+  letter-spacing:4px;
+  font-size:25px;
+  white-space:nowrap;
 }
 
-.brand span{
-  color:var(--cyan);
-}
+.logo span{color:var(--cyan)}
 
-.header-tools{
-  display:flex;
-  align-items:center;
-  gap:6px;
+.tools{
   direction:ltr;
+  display:flex;
+  gap:6px;
+  align-items:center;
 }
 
-.home-btn{
-  width:40px;
-  height:40px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border:1px solid #31506d;
-  border-radius:10px;
-  background:#091726;
-  color:white;
-  font-size:21px;
+.tool,
+.lang{
+  height:41px;
+  border:1px solid #31516c;
+  border-radius:11px;
+  background:#091827;
+  color:#fff;
+  padding:4px 8px;
 }
 
-.lang-btn{
-  height:40px;
-  min-width:45px;
+.tool{
+  width:42px;
+  font-size:20px;
+}
+
+.lang{
   display:flex;
   align-items:center;
-  justify-content:center;
   gap:5px;
-  border:1px solid #304e69;
-  background:#091726;
-  border-radius:10px;
-  color:white;
-  padding:4px 7px;
+  font-size:12px;
 }
 
-.lang-btn.active{
+.lang.active{
   border-color:var(--cyan);
-  box-shadow:0 0 12px rgba(20,200,226,.18);
+  box-shadow:0 0 14px rgba(22,199,220,.15);
 }
 
-.lang-btn img{
-  width:27px;
+.lang img{
+  width:28px;
   height:18px;
   object-fit:cover;
   border-radius:3px;
 }
 
-.flag{
-  font-size:20px;
-}
+.flag{font-size:19px}
 
-.intro{
-  margin-top:10px;
+.subtitle{
   color:var(--muted);
+  margin-top:11px;
+  line-height:1.7;
   font-size:12px;
-  line-height:1.75;
 }
 
-/* VISITOR */
+/* ---------- GENERAL ---------- */
 
-.visitor{
-  margin:11px 13px 0;
-  display:flex;
-  justify-content:center;
-}
-
-.visitor-card{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  background:#0a1929;
-  border:1px solid #29475f;
-  border-radius:999px;
-  padding:7px 12px;
-  font-size:11px;
-  color:var(--muted);
-}
-
-.visitor-card strong{
-  color:var(--orange);
-  font-size:13px;
-}
-
-/* PAGE */
-
-.page{
-  display:none;
+.wrap{
+  max-width:950px;
+  margin:auto;
   padding:13px;
 }
 
-.page.active{
-  display:block;
-}
-
-.section{
-  background:var(--panel);
-  border:1px solid #294860;
-  border-radius:16px;
-  padding:14px;
-  margin-bottom:12px;
-}
-
-.section-title{
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:6px;
-}
-
-.section-subtitle{
+.visits{
+  width:max-content;
+  max-width:100%;
+  margin:3px auto 14px;
+  padding:8px 15px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid #31516d;
+  background:#091827;
+  border-radius:100px;
   color:var(--muted);
   font-size:11px;
-  line-height:1.7;
 }
 
-/* CENTER */
-
-.network{
-  margin-top:16px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+.visits strong{
+  color:var(--orange);
+  font-size:14px;
 }
 
-.center-node{
-  width:165px;
-  height:165px;
-  border-radius:50%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+.card{
+  background:linear-gradient(180deg,#0c1d30,#091827);
+  border:1px solid #2b4a64;
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:13px;
+}
+
+.main-title{
+  margin:0;
   text-align:center;
-  border:2px solid var(--cyan);
-  background:
-    radial-gradient(circle,#0d2b43,#071421 70%);
-  box-shadow:0 0 25px rgba(20,200,226,.22);
+  font-size:22px;
+  color:var(--cyan);
 }
 
-.center-node strong{
-  font-size:17px;
-  line-height:1.5;
-}
-
-.center-node small{
+.lead{
+  text-align:center;
   color:var(--muted);
-  margin-top:6px;
+  font-size:11px;
+  line-height:1.9;
+  margin:12px auto 15px;
+  max-width:650px;
 }
 
-/* NODES */
+/* ---------- FULL MAP BUTTON ---------- */
 
-.nodes{
+.open-map{
   width:100%;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:15px;
-}
-
-.node{
-  min-height:125px;
-  background:#091a2b;
-  border:1px solid #2c4d68;
-  border-radius:14px;
-  padding:12px;
-  transition:.15s;
-}
-
-.node:active{
-  transform:scale(.98);
-}
-
-.node-icon{
-  font-size:27px;
-  margin-bottom:7px;
-}
-
-.node-title{
-  font-size:14px;
-  font-weight:bold;
-}
-
-.node-desc{
-  color:var(--muted);
-  font-size:10px;
-  line-height:1.55;
-  margin-top:5px;
-}
-
-.node-status{
-  display:inline-block;
-  margin-top:7px;
-  padding:3px 7px;
-  border-radius:20px;
-  border:1px solid #33516b;
-  font-size:9px;
-}
-
-.node.green{border-color:#28694e}
-.node.purple{border-color:#67458c}
-.node.red{border-color:#713b44}
-.node.blue{border-color:#275a88}
-.node.yellow{border-color:#745e28}
-.node.cyan-border{border-color:#237384}
-
-/* LEGEND */
-
-.legend{
-  margin-top:13px;
-  padding:10px;
-  background:#081725;
-  border:1px solid #27435b;
-  border-radius:11px;
-}
-
-.legend-title{
-  font-size:11px;
-  color:var(--muted);
-  margin-bottom:8px;
-}
-
-.legend-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
-  font-size:9px;
-}
-
-.legend-line{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.line{
-  width:26px;
-  height:2px;
-}
-
-.line.green{background:var(--green)}
-.line.blue{background:var(--blue)}
-.line.yellow{background:var(--yellow)}
-
-.line.dashed{
-  border-top:2px dashed var(--red);
-}
-
-/* EUROPE */
-
-.country-card{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  padding:12px;
-  margin-bottom:9px;
-  background:#0a1929;
-  border:1px solid #28465f;
-  border-radius:13px;
-}
-
-.country-flag{
-  font-size:30px;
-}
-
-.country-info{
-  flex:1;
-}
-
-.country-name{
-  font-size:15px;
-  font-weight:bold;
-}
-
-.country-meta{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:4px;
-}
-
-.status-pill{
-  border:1px solid #35516b;
-  border-radius:999px;
-  padding:5px 8px;
-  color:var(--muted);
-  font-size:9px;
-}
-
-.status-pill.green{
-  color:var(--green);
-  border-color:var(--green);
-}
-
-.status-pill.yellow{
-  color:var(--yellow);
-  border-color:var(--yellow);
-}
-
-.status-pill.grey{
-  color:#a7b1ba;
-}
-
-/* COUNTRY */
-
-.country-title{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:23px;
-  font-weight:bold;
-  margin-bottom:12px;
-}
-
-.country-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:9px;
-}
-
-.country-item{
-  min-height:100px;
-  padding:11px;
-  background:#0a1929;
-  border:1px solid #284760;
-  border-radius:13px;
-  text-align:center;
-}
-
-.country-item-icon{
-  font-size:24px;
-}
-
-.country-item-label{
+  min-height:76px;
+  border:1px solid var(--cyan);
+  border-radius:17px;
+  background:linear-gradient(90deg,#0b2438,#0c1c30);
   color:var(--text);
-  font-size:11px;
-  margin-top:7px;
-}
-
-.country-item-status{
-  color:var(--muted);
-  font-size:9px;
-  margin-top:5px;
-}
-
-/* MOSQUES */
-
-.mosque-card{
-  padding:12px;
-  margin-bottom:10px;
-  background:#0a192a;
-  border:1px solid #294861;
-  border-radius:14px;
-}
-
-.mosque-top{
-  display:flex;
-  gap:10px;
-}
-
-.mosque-photo{
-  width:80px;
-  height:72px;
-  border-radius:10px;
-  background:linear-gradient(145deg,#15334b,#071421);
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size:30px;
+  gap:13px;
+  cursor:pointer;
+  box-shadow:0 0 20px rgba(22,199,220,.08);
 }
 
-.mosque-main{
-  flex:1;
+.open-map:active{transform:scale(.99)}
+
+.open-map-icon{
+  font-size:31px;
+  color:var(--cyan);
 }
 
-.mosque-title{
-  font-size:14px;
-  font-weight:bold;
+.open-map strong{
+  display:block;
+  color:var(--cyan);
+  font-size:15px;
 }
 
-.mosque-meta{
-  font-size:10px;
-  color:var(--muted);
-  line-height:1.7;
+.open-map small{
+  display:block;
   margin-top:5px;
+  color:var(--muted);
 }
 
-.badge{
-  display:inline-block;
-  border-radius:20px;
-  padding:4px 8px;
+/* ---------- CATEGORY GRID ---------- */
+
+.categories{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:16px;
+}
+
+.cat{
+  min-height:154px;
+  padding:12px;
+  border-radius:15px;
+  background:#091a2a;
+  border:1px solid #31506a;
+}
+
+.cat-icon{font-size:26px}
+
+.cat h3{
+  font-size:14px;
+  margin:9px 0 7px;
+}
+
+.cat p{
+  margin:0;
+  font-size:10px;
+  line-height:1.65;
+  color:var(--muted);
+}
+
+.green{border-color:#267554}
+.green h3{color:var(--green)}
+
+.purple{border-color:#704a91}
+.purple h3{color:var(--purple)}
+
+.red{border-color:#803b46}
+.red h3{color:var(--red)}
+
+.blue{border-color:#2c6290}
+.blue h3{color:var(--blue)}
+
+.yellow{border-color:#7d6729}
+.yellow h3{color:var(--yellow)}
+
+.orange{border-color:#87552c}
+.orange h3{color:var(--orange)}
+
+.cyan{border-color:#237a88}
+.cyan h3{color:var(--cyan)}
+
+/* ---------- SMALL MAP PREVIEW ---------- */
+
+.preview-title{
+  color:var(--cyan);
+  text-align:center;
+  margin:0 0 15px;
+  font-size:17px;
+}
+
+.mini-map{
+  position:relative;
+  min-height:520px;
+  direction:ltr;
+}
+
+.mini-center{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:145px;
+  height:145px;
+  border-radius:50%;
+  border:2px solid var(--cyan);
+  background:radial-gradient(circle,#12324b,#071521);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:18px;
+  font-weight:bold;
+  direction:rtl;
+  box-shadow:0 0 25px rgba(22,199,220,.17);
+  z-index:4;
+}
+
+.mini-node{
+  position:absolute;
+  width:126px;
+  min-height:77px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border:1px solid;
+  border-radius:14px;
+  background:#081827;
+  padding:8px;
+  font-size:10px;
+  direction:rtl;
+  z-index:3;
+}
+
+.m1{left:0;top:9%;border-color:var(--purple);color:var(--purple)}
+.m2{right:0;top:9%;border-color:var(--green);color:var(--green)}
+.m3{left:0;top:38%;border-color:var(--yellow);color:var(--yellow)}
+.m4{right:0;top:38%;border-color:var(--red);color:var(--red)}
+.m5{left:0;bottom:8%;border-color:var(--orange);color:var(--orange)}
+.m6{right:0;bottom:8%;border-color:var(--blue);color:var(--blue)}
+
+.map-line{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:34%;
+  height:1px;
+  transform-origin:left center;
+  opacity:.7;
+  z-index:1;
+}
+
+.l1{background:var(--purple);transform:rotate(205deg)}
+.l2{background:var(--green);transform:rotate(335deg)}
+.l3{background:var(--yellow);transform:rotate(180deg)}
+.l4{background:var(--red);transform:rotate(0deg)}
+.l5{background:var(--orange);transform:rotate(145deg)}
+.l6{background:var(--blue);transform:rotate(35deg)}
+
+/* ---------- INFO ---------- */
+
+.info{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--muted);
+  line-height:1.8;
+  font-size:11px;
+}
+
+.info-icon{
+  font-size:27px;
+  color:var(--cyan);
+}
+
+/* ---------- FULL SCREEN MAP ---------- */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:#040b13;
+  display:none;
+  flex-direction:column;
+}
+
+.modal.show{display:flex}
+
+.modal-head{
+  min-height:70px;
+  padding:
+    calc(10px + env(safe-area-inset-top))
+    13px 10px;
+  background:#071421;
+  border-bottom:1px solid #284760;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.modal-head strong{
+  color:var(--cyan);
+  font-size:15px;
+}
+
+.close{
+  width:44px;
+  height:44px;
+  border:1px solid #35546e;
+  border-radius:11px;
+  background:#0a1929;
+  color:#fff;
+  font-size:23px;
+}
+
+.map-scroll{
+  flex:1;
+  overflow:auto;
+  padding:20px;
+  -webkit-overflow-scrolling:touch;
+}
+
+.big-map{
+  position:relative;
+  width:900px;
+  height:760px;
+  margin:auto;
+  direction:ltr;
+  background:
+    radial-gradient(circle at center,#102b43 0,#071421 30%,#050f19 70%);
+  border:1px solid #27445d;
+  border-radius:25px;
+}
+
+.core{
+  position:absolute;
+  left:350px;
+  top:285px;
+  width:200px;
+  height:200px;
+  border:2px solid var(--cyan);
+  border-radius:50%;
+  background:radial-gradient(circle,#12354f,#071521);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  direction:rtl;
+  padding:25px;
+  font-size:19px;
+  font-weight:bold;
+  z-index:10;
+  box-shadow:0 0 35px rgba(22,199,220,.22);
+}
+
+.branch{
+  position:absolute;
+  width:190px;
+  min-height:112px;
+  border:1px solid;
+  border-radius:15px;
+  background:#081725;
+  direction:rtl;
+  padding:12px;
+  z-index:9;
+}
+
+.branch strong{
+  display:block;
   margin-bottom:7px;
+  font-size:13px;
+}
+
+.branch small{
+  color:var(--muted);
+  line-height:1.65;
   font-size:9px;
 }
 
-.badge.confirmed{
-  color:var(--green);
-  border:1px solid var(--green);
-}
+.b1{left:35px;top:60px;border-color:var(--purple)}
+.b1 strong{color:var(--purple)}
 
-.badge.review{
-  color:var(--yellow);
-  border:1px solid var(--yellow);
-}
+.b2{left:355px;top:40px;border-color:var(--green)}
+.b2 strong{color:var(--green)}
 
-/* TIMELINE */
+.b3{right:35px;top:60px;border-color:var(--red)}
+.b3 strong{color:var(--red)}
 
-.timeline{
-  margin-top:14px;
-}
+.b4{right:25px;top:320px;border-color:var(--blue)}
+.b4 strong{color:var(--blue)}
 
-.timeline-line{
-  height:4px;
-  background:#263f55;
-  margin:24px 12px 13px;
-  position:relative;
-}
+.b5{right:55px;bottom:55px;border-color:var(--cyan)}
+.b5 strong{color:var(--cyan)}
 
-.timeline-line:before{
-  content:"";
+.b6{left:355px;bottom:35px;border-color:#4776bf}
+.b6 strong{color:#63a1ff}
+
+.b7{left:35px;bottom:55px;border-color:var(--orange)}
+.b7 strong{color:var(--orange)}
+
+.b8{left:20px;top:320px;border-color:var(--yellow)}
+.b8 strong{color:var(--yellow)}
+
+.connector{
   position:absolute;
-  left:5%;
-  right:5%;
-  top:0;
-  height:4px;
-  background:var(--cyan);
+  left:450px;
+  top:385px;
+  width:285px;
+  height:2px;
+  transform-origin:left center;
+  opacity:.75;
+  z-index:2;
 }
 
-.timeline-dates{
-  display:flex;
-  justify-content:space-between;
+.c1{background:var(--purple);transform:rotate(213deg)}
+.c2{background:var(--green);transform:rotate(270deg)}
+.c3{background:var(--red);transform:rotate(327deg)}
+.c4{background:var(--blue);transform:rotate(0deg)}
+.c5{background:var(--cyan);transform:rotate(34deg)}
+.c6{background:#4776bf;transform:rotate(90deg)}
+.c7{background:var(--orange);transform:rotate(145deg)}
+.c8{background:var(--yellow);transform:rotate(180deg)}
+
+.map-note{
+  position:absolute;
+  left:260px;
+  bottom:6px;
+  width:380px;
+  text-align:center;
   color:var(--muted);
   font-size:9px;
+  direction:rtl;
 }
 
-/* DESKTOP */
+/* ---------- RESPONSIVE ---------- */
 
-@media(min-width:850px){
-
-  body{
-    max-width:1150px;
-    margin:auto;
-  }
-
-  .nodes{
-    grid-template-columns:repeat(4,1fr);
-  }
-
-  .country-grid{
-    grid-template-columns:repeat(4,1fr);
-  }
-
+@media(max-width:390px){
+  .logo{font-size:21px;letter-spacing:3px}
+  .lang span:last-child{display:none}
+  .lang{min-width:42px}
+  .cat{min-height:162px}
 }
 
+@media(min-width:750px){
+  .categories{grid-template-columns:repeat(4,1fr)}
+}
 </style>
 </head>
 
 <body>
 
-<header class="header">
+<header>
+  <div class="header-row">
 
-  <div class="header-top">
-
-    <div class="brand">
+    <div class="logo">
       TRACE<span>VERITY</span>
     </div>
 
-    <div class="header-tools">
+    <div class="tools">
 
-      <button class="home-btn" onclick="showPage('home')" title="Home">
-        🏠
-      </button>
+      <button class="tool" onclick="goHome()" aria-label="Home">🏠</button>
 
-      <button class="lang-btn active" onclick="setLanguage('fa',this)">
+      <button class="lang active" onclick="setLanguage('fa',this)">
         <img src="lion-sun-flag.jpg" alt="Persian">
         <span>FA</span>
       </button>
 
-      <button class="lang-btn" onclick="setLanguage('da',this)">
+      <button class="lang" onclick="setLanguage('da',this)">
         <span class="flag">🇩🇰</span>
         <span>DA</span>
       </button>
 
-      <button class="lang-btn" onclick="setLanguage('en',this)">
+      <button class="lang" onclick="setLanguage('en',this)">
         <span class="flag">🇺🇸</span>
         <span>EN</span>
       </button>
@@ -564,896 +559,450 @@ button{
 
   </div>
 
-  <div class="intro" data-i18n="intro">
+  <div class="subtitle" data-t="subtitle">
     نقشه شواهد برای درک ساختارهای مذهبی، سازمانی، رسانه‌ای و مالی مرتبط با شبکه‌های شیعه دوازده‌امامی در ایران، اروپا و جهان.
   </div>
-
 </header>
 
 
-<div class="visitor">
+<main class="wrap" id="home">
 
-  <div class="visitor-card">
-    👁️
+  <div class="visits">
+    👁
     <strong>12,846</strong>
-    <span data-i18n="visitors">بازدید Demo</span>
+    <span data-t="visits">بازدید Demo</span>
+  </div>
+
+
+  <section class="card">
+
+    <h1 class="main-title" data-t="overviewTitle">
+      نمای کلی ساختار شبکه
+    </h1>
+
+    <div class="lead" data-t="overviewText">
+      این نمودار نمای کلی ساختار و ارتباطات اصلی شبکه شیعه دوازده‌امامی را در سطح جهانی نشان می‌دهد؛ شامل حوزه و مرجعیت، مساجد، نهادهای حکومتی، رسانه، مالی، افراد، اسناد و ارتباطات بین‌المللی.
+    </div>
+
+
+    <button class="open-map" onclick="openMap()">
+
+      <div class="open-map-icon">⛶</div>
+
+      <div>
+        <strong data-t="openMap">
+          مشاهده نقشه کامل ساختار شبکه
+        </strong>
+
+        <small data-t="openMapSub">
+          باز کردن Mind Map بزرگ
+        </small>
+      </div>
+
+    </button>
+
+
+    <div class="categories">
+
+      <div class="cat green">
+        <div class="cat-icon">🎓</div>
+        <h3 data-t="hawza">حوزه و مرجعیت</h3>
+        <p data-t="hawzaText">
+          حوزه‌ها، مراجع، مدارس دینی، مراکز آموزشی و شبکه‌های علمی.
+        </p>
+      </div>
+
+
+      <div class="cat purple">
+        <div class="cat-icon">🕌</div>
+        <h3 data-t="mosques">مساجد و مراکز مذهبی</h3>
+        <p data-t="mosquesText">
+          مساجد، حسینیه‌ها، مراکز فرهنگی، انجمن‌ها و مؤسسات در ایران، اروپا و جهان.
+        </p>
+      </div>
+
+
+      <div class="cat red">
+        <div class="cat-icon">🏛️</div>
+        <h3 data-t="state">نهادهای حکومتی</h3>
+        <p data-t="stateText">
+          نهادهای دولتی، مذهبی، نظامی و امنیتی؛ هر رابطه تنها با وضعیت سند مشخص نمایش داده می‌شود.
+        </p>
+      </div>
+
+
+      <div class="cat blue">
+        <div class="cat-icon">📡</div>
+        <h3 data-t="media">رسانه و ارتباطات</h3>
+        <p data-t="mediaText">
+          رسانه‌ها، وب‌سایت‌ها، تلویزیون، رادیو، شبکه‌های اجتماعی و کانال‌ها.
+        </p>
+      </div>
+
+
+      <div class="cat cyan">
+        <div class="cat-icon">💰</div>
+        <h3 data-t="finance">شبکه مالی و دارایی‌ها</h3>
+        <p data-t="financeText">
+          منابع مالی، شرکت‌ها، کمک‌ها، املاک، دارایی‌ها و انتقال‌های مستند.
+        </p>
+      </div>
+
+
+      <div class="cat orange">
+        <div class="cat-icon">👥</div>
+        <h3 data-t="people">افراد و مدیران</h3>
+        <p data-t="peopleText">
+          روحانیون، مدیران، اعضای هیئت‌مدیره و اشخاص کلیدی مرتبط با پرونده‌ها.
+        </p>
+      </div>
+
+
+      <div class="cat purple">
+        <div class="cat-icon">📁</div>
+        <h3 data-t="evidence">اسناد و شواهد</h3>
+        <p data-t="evidenceText">
+          اسناد رسمی، ثبت شرکت، املاک، گزارش‌ها، تحقیقات، تصاویر، ویدئو و منابع عمومی.
+        </p>
+      </div>
+
+
+      <div class="cat blue">
+        <div class="cat-icon">🌍</div>
+        <h3 data-t="world">بین‌الملل و اروپا</h3>
+        <p data-t="worldText">
+          کشورها، سازمان‌ها، مساجد، افراد و روابط ثبت‌شده در اروپا و دیگر نقاط جهان.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2 class="preview-title" data-t="preview">
+      پیش‌نمایش نقشه ساختار شبکه
+    </h2>
+
+    <div class="mini-map">
+
+      <div class="map-line l1"></div>
+      <div class="map-line l2"></div>
+      <div class="map-line l3"></div>
+      <div class="map-line l4"></div>
+      <div class="map-line l5"></div>
+      <div class="map-line l6"></div>
+
+      <div class="mini-center" data-t="core">
+        شبکه شیعه دوازده‌امامی
+      </div>
+
+      <div class="mini-node m1" data-t="mosques">
+        مساجد و مراکز مذهبی
+      </div>
+
+      <div class="mini-node m2" data-t="hawza">
+        حوزه و مرجعیت
+      </div>
+
+      <div class="mini-node m3" data-t="finance">
+        شبکه مالی
+      </div>
+
+      <div class="mini-node m4" data-t="state">
+        نهادهای حکومتی
+      </div>
+
+      <div class="mini-node m5" data-t="people">
+        افراد و مدیران
+      </div>
+
+      <div class="mini-node m6" data-t="media">
+        رسانه و ارتباطات
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="card info">
+    <div class="info-icon">ⓘ</div>
+    <div data-t="info">
+      برای مشاهده جزئیات هر بخش، روی کارت مربوطه کلیک کنید. رابطه مستند، رابطه ساختاری، رابطه در حال بررسی و ادعای تأییدنشده باید از یکدیگر تفکیک شوند.
+    </div>
+  </section>
+
+</main>
+
+
+<!-- FULL MAP MODAL -->
+
+<div class="modal" id="mapModal">
+
+  <div class="modal-head">
+
+    <strong data-t="fullMap">
+      نقشه کامل ساختار شبکه
+    </strong>
+
+    <button class="close" onclick="closeMap()">✕</button>
+
+  </div>
+
+
+  <div class="map-scroll">
+
+    <div class="big-map">
+
+      <div class="connector c1"></div>
+      <div class="connector c2"></div>
+      <div class="connector c3"></div>
+      <div class="connector c4"></div>
+      <div class="connector c5"></div>
+      <div class="connector c6"></div>
+      <div class="connector c7"></div>
+      <div class="connector c8"></div>
+
+
+      <div class="core" data-t="core">
+        شبکه شیعه دوازده‌امامی
+      </div>
+
+
+      <div class="branch b1">
+        <strong data-t="mosques">مساجد و مراکز مذهبی</strong>
+        <small data-t="mosquesBig">
+          مساجد • حسینیه‌ها • مراکز فرهنگی • انجمن‌ها • مؤسسات
+        </small>
+      </div>
+
+
+      <div class="branch b2">
+        <strong data-t="hawza">حوزه و مرجعیت</strong>
+        <small data-t="hawzaBig">
+          حوزه قم • نجف • مراجع • مدارس • مراکز آموزشی و پژوهشی
+        </small>
+      </div>
+
+
+      <div class="branch b3">
+        <strong data-t="state">نهادهای حکومتی</strong>
+        <small data-t="stateBig">
+          نهادهای دولتی • مذهبی • نظامی • امنیتی • ساختارهای مرتبط
+        </small>
+      </div>
+
+
+      <div class="branch b4">
+        <strong data-t="media">رسانه و ارتباطات</strong>
+        <small data-t="mediaBig">
+          تلویزیون • رادیو • سایت‌ها • شبکه‌های اجتماعی • کانال‌ها
+        </small>
+      </div>
+
+
+      <div class="branch b5">
+        <strong data-t="evidence">اسناد و شواهد</strong>
+        <small data-t="evidenceBig">
+          اسناد رسمی • گزارش‌ها • ثبت شرکت • املاک • ویدئو • منابع عمومی
+        </small>
+      </div>
+
+
+      <div class="branch b6">
+        <strong data-t="world">بین‌الملل و اروپا</strong>
+        <small data-t="worldBig">
+          اروپا • سازمان‌های بین‌المللی • کشورهای دیگر • ارتباطات ثبت‌شده
+        </small>
+      </div>
+
+
+      <div class="branch b7">
+        <strong data-t="people">افراد و مدیران</strong>
+        <small data-t="peopleBig">
+          روحانیون • مدیران • مسئولان • اعضای هیئت‌مدیره • افراد مرتبط
+        </small>
+      </div>
+
+
+      <div class="branch b8">
+        <strong data-t="finance">شبکه مالی و دارایی‌ها</strong>
+        <small data-t="financeBig">
+          منابع مالی • شرکت‌ها • املاک • کمک‌ها • انتقال‌های مستند
+        </small>
+      </div>
+
+
+      <div class="map-note" data-t="mapNote">
+        این نقشه ساختار تحقیق را نشان می‌دهد؛ نمایش یک گره یا خط به‌تنهایی به معنی اثبات وابستگی نیست و وضعیت هر رابطه باید جداگانه ثبت شود.
+      </div>
+
+    </div>
+
   </div>
 
 </div>
 
 
-<!-- HOME -->
-
-<section id="home" class="page active">
-
-  <div class="section">
-
-    <div class="section-title" data-i18n="understand">
-      فهم شبکه
-    </div>
-
-    <div class="section-subtitle" data-i18n="understandSub">
-      نمای کلی ساختار موضوعی تحقیق. هر رابطه باید دارای منبع و وضعیت اعتبار مشخص باشد.
-    </div>
-
-
-    <div class="network">
-
-      <div class="center-node">
-
-        <strong data-i18n="center">
-          شبکه شیعه دوازده‌امامی
-        </strong>
-
-        <small data-i18n="researchCore">
-          هسته تحقیق
-        </small>
-
-      </div>
-
-
-      <div class="nodes">
-
-        <div class="node green">
-
-          <div class="node-icon">🎓</div>
-
-          <div class="node-title" data-i18n="hawza">
-            حوزه و مرجعیت
-          </div>
-
-          <div class="node-desc" data-i18n="hawzaDesc">
-            حوزه علمیه قم، حوزه نجف، مدارس، مراجع و مراکز آموزشی.
-          </div>
-
-          <div class="node-status" data-i18n="topicStructure">
-            ساختار موضوعی
-          </div>
-
-        </div>
-
-
-        <div class="node purple" onclick="showPage('europe')">
-
-          <div class="node-icon">🕌</div>
-
-          <div class="node-title" data-i18n="mosques">
-            مساجد و مراکز مذهبی
-          </div>
-
-          <div class="node-desc" data-i18n="mosquesDesc">
-            مساجد، حسینیه‌ها، مراکز فرهنگی، انجمن‌ها و مؤسسات.
-          </div>
-
-          <div class="node-status" data-i18n="europeWorld">
-            اروپا و جهان
-          </div>
-
-        </div>
-
-
-        <div class="node red">
-
-          <div class="node-icon">🏛️</div>
-
-          <div class="node-title" data-i18n="iranInstitutions">
-            ایران و نهادهای حکومتی
-          </div>
-
-          <div class="node-desc" data-i18n="iranInstitutionsDesc">
-            نهادهای حکومتی، نهادهای مذهبی، سپاه پاسداران و ساختارهای مرتبط.
-          </div>
-
-          <div class="node-status" data-i18n="evidenceOnly">
-            روابط فقط با سند
-          </div>
-
-        </div>
-
-
-        <div class="node blue">
-
-          <div class="node-icon">📡</div>
-
-          <div class="node-title" data-i18n="media">
-            رسانه و ارتباطات
-          </div>
-
-          <div class="node-desc" data-i18n="mediaDesc">
-            تلویزیون، رادیو، وب‌سایت‌ها، شبکه‌های اجتماعی و کانال‌ها.
-          </div>
-
-          <div class="node-status" data-i18n="mediaNetwork">
-            شبکه رسانه‌ای
-          </div>
-
-        </div>
-
-
-        <div class="node cyan-border">
-
-          <div class="node-icon">💰</div>
-
-          <div class="node-title" data-i18n="finance">
-            شبکه مالی و دارایی‌ها
-          </div>
-
-          <div class="node-desc" data-i18n="financeDesc">
-            منابع مالی، شرکت‌ها، املاک، کمک‌ها و انتقال‌های مستند.
-          </div>
-
-          <div class="node-status" data-i18n="financialEvidence">
-            شواهد مالی
-          </div>
-
-        </div>
-
-
-        <div class="node yellow">
-
-          <div class="node-icon">👥</div>
-
-          <div class="node-title" data-i18n="people">
-            افراد و مدیران
-          </div>
-
-          <div class="node-desc" data-i18n="peopleDesc">
-            روحانیون، مدیران، اعضای هیئت‌مدیره و اشخاص مرتبط.
-          </div>
-
-          <div class="node-status" data-i18n="peopleRelations">
-            روابط اشخاص
-          </div>
-
-        </div>
-
-
-        <div class="node purple">
-
-          <div class="node-icon">📁</div>
-
-          <div class="node-title" data-i18n="evidence">
-            اسناد و شواهد
-          </div>
-
-          <div class="node-desc" data-i18n="evidenceDesc">
-            اسناد رسمی، ثبت شرکت، املاک، گزارش‌ها، ویدئو و منابع عمومی.
-          </div>
-
-          <div class="node-status" data-i18n="sourceArchive">
-            آرشیو منابع
-          </div>
-
-        </div>
-
-
-        <div class="node blue" onclick="showPage('europe')">
-
-          <div class="node-icon">🌍</div>
-
-          <div class="node-title" data-i18n="europeGeography">
-            اروپا و جغرافیا
-          </div>
-
-          <div class="node-desc" data-i18n="europeGeographyDesc">
-            دانمارک، سوئد، نروژ، آلمان، فرانسه و کشورهای دیگر.
-          </div>
-
-          <div class="node-status" data-i18n="openEurope">
-            ورود به اروپا
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="legend">
-
-      <div class="legend-title" data-i18n="legend">
-        راهنمای روابط
-      </div>
-
-      <div class="legend-row">
-
-        <div class="legend-line">
-          <div class="line green"></div>
-          <span data-i18n="documented">
-            مستند با سند
-          </span>
-        </div>
-
-        <div class="legend-line">
-          <div class="line blue"></div>
-          <span data-i18n="structural">
-            رابطه ساختاری
-          </span>
-        </div>
-
-        <div class="legend-line">
-          <div class="line yellow"></div>
-          <span data-i18n="review">
-            در حال بررسی
-          </span>
-        </div>
-
-        <div class="legend-line">
-          <div class="line dashed"></div>
-          <span data-i18n="unverified">
-            ادعا / تأییدنشده
-          </span>
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="section">
-
-    <div class="section-title" data-i18n="timeline">
-      خط زمانی
-    </div>
-
-    <div class="section-subtitle" data-i18n="timelineSub">
-      تغییرات تاریخی شبکه‌ها، نهادها و پرونده‌ها در این قسمت دنبال می‌شود.
-    </div>
-
-    <div class="timeline">
-
-      <div class="timeline-line"></div>
-
-      <div class="timeline-dates">
-        <span>1979</span>
-        <span>1990</span>
-        <span>2000</span>
-        <span>2010</span>
-        <span>2020+</span>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- EUROPE -->
-
-<section id="europe" class="page">
-
-  <div class="section">
-
-    <div class="section-title" data-i18n="europeTitle">
-      🌍 اروپا
-    </div>
-
-    <div class="section-subtitle" data-i18n="europeSub">
-      هر کشور از یک قالب ثابت برای مساجد، سازمان‌ها، افراد، مالی، رسانه، آموزش و اسناد استفاده می‌کند.
-    </div>
-
-    <br>
-
-
-    <div class="country-card" onclick="showPage('denmark')">
-
-      <div class="country-flag">🇩🇰</div>
-
-      <div class="country-info">
-
-        <div class="country-name" data-i18n="denmark">
-          دانمارک
-        </div>
-
-        <div class="country-meta" data-i18n="countryTemplate">
-          مساجد • سازمان‌ها • مالی • رسانه • اسناد
-        </div>
-
-      </div>
-
-      <div class="status-pill green" data-i18n="activeResearch">
-        تحقیق فعال
-      </div>
-
-    </div>
-
-
-    <div class="country-card">
-
-      <div class="country-flag">🇸🇪</div>
-
-      <div class="country-info">
-
-        <div class="country-name" data-i18n="sweden">
-          سوئد
-        </div>
-
-        <div class="country-meta" data-i18n="countryTemplate">
-          مساجد • سازمان‌ها • مالی • رسانه • اسناد
-        </div>
-
-      </div>
-
-      <div class="status-pill yellow" data-i18n="underReview">
-        در حال بررسی
-      </div>
-
-    </div>
-
-
-    <div class="country-card">
-
-      <div class="country-flag">🇳🇴</div>
-
-      <div class="country-info">
-
-        <div class="country-name" data-i18n="norway">
-          نروژ
-        </div>
-
-        <div class="country-meta" data-i18n="countryTemplate">
-          مساجد • سازمان‌ها • مالی • رسانه • اسناد
-        </div>
-
-      </div>
-
-      <div class="status-pill yellow" data-i18n="underReview">
-        در حال بررسی
-      </div>
-
-    </div>
-
-
-    <div class="country-card">
-
-      <div class="country-flag">🇩🇪</div>
-
-      <div class="country-info">
-
-        <div class="country-name" data-i18n="germany">
-          آلمان
-        </div>
-
-        <div class="country-meta" data-i18n="countryTemplate">
-          مساجد • سازمان‌ها • مالی • رسانه • اسناد
-        </div>
-
-      </div>
-
-      <div class="status-pill yellow" data-i18n="underReview">
-        در حال بررسی
-      </div>
-
-    </div>
-
-
-    <div class="country-card">
-
-      <div class="country-flag">🇫🇷</div>
-
-      <div class="country-info">
-
-        <div class="country-name" data-i18n="france">
-          فرانسه
-        </div>
-
-        <div class="country-meta" data-i18n="countryTemplate">
-          مساجد • سازمان‌ها • مالی • رسانه • اسناد
-        </div>
-
-      </div>
-
-      <div class="status-pill grey" data-i18n="noData">
-        داده ثبت نشده
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- DENMARK -->
-
-<section id="denmark" class="page">
-
-  <div class="country-title">
-    <span>🇩🇰</span>
-    <span data-i18n="denmark">
-      دانمارک
-    </span>
-  </div>
-
-
-  <div class="section-subtitle" data-i18n="countryStandard">
-    قالب استاندارد پرونده کشور. بخش‌های خالی بعداً با اسناد و منابع معتبر تکمیل می‌شوند.
-  </div>
-
-  <br>
-
-
-  <div class="country-grid">
-
-
-    <div class="country-item" onclick="showPage('mosques')">
-
-      <div class="country-item-icon">
-        🕌
-      </div>
-
-      <div class="country-item-label" data-i18n="mosques">
-        مساجد و مراکز مذهبی
-      </div>
-
-      <div class="country-item-status" data-i18n="activeResearch">
-        تحقیق فعال
-      </div>
-
-    </div>
-
-
-    <div class="country-item">
-
-      <div class="country-item-icon">
-        🏛️
-      </div>
-
-      <div class="country-item-label" data-i18n="organizations">
-        سازمان‌ها و مؤسسات
-      </div>
-
-      <div class="country-item-status" data-i18n="activeResearch">
-        تحقیق فعال
-      </div>
-
-    </div>
-
-
-    <div class="country-item">
-
-      <div class="country-item-icon">
-        👥
-      </div>
-
-      <div class="country-item-label" data-i18n="people">
-        افراد و مدیران
-      </div>
-
-      <div class="country-item-status" data-i18n="underReview">
-        در حال بررسی
-      </div>
-
-    </div>
-
-
-    <div class="country-item">
-
-      <div class="country-item-icon">
-        💰
-      </div>
-
-      <div class="country-item-label" data-i18n="finance">
-        شبکه مالی و دارایی‌ها
-      </div>
-
-      <div class="country-item-status" data-i18n="underReview">
-        در حال بررسی
-      </div>
-
-    </div>
-
-
-    <div class="country-item">
-
-      <div class="country-item-icon">
-        📡
-      </div>
-
-      <div class="country-item-label" data-i18n="media">
-        رسانه و ارتباطات
-      </div>
-
-      <div class="country-item-status" data-i18n="underReview">
-        در حال بررسی
-      </div>
-
-    </div>
-
-
-    <div class="country-item">
-
-      <div class="country-item-icon">
-        📄
-      </div>
-
-      <div class="country-item-label" data-i18n="evidence">
-        اسناد و شواهد
-      </div>
-
-      <div class="country-item-status" data-i18n="activeResearch">
-        تحقیق فعال
-      </div>
-
-    </div>
-
-
-    <div class="country-item">
-
-      <div class="country-item-icon">
-        🎓
-      </div>
-
-      <div class="country-item-label" data-i18n="education">
-        حوزه و آموزش
-      </div>
-
-      <div class="country-item-status" data-i18n="underReview">
-        در حال بررسی
-      </div>
-
-    </div>
-
-
-    <div class="country-item">
-
-      <div class="country-item-icon">
-        🌐
-      </div>
-
-      <div class="country-item-label" data-i18n="international">
-        ارتباطات بین‌المللی
-      </div>
-
-      <div class="country-item-status" data-i18n="underReview">
-        در حال بررسی
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- MOSQUES -->
-
-<section id="mosques" class="page">
-
-  <div class="section">
-
-    <div class="section-title" data-i18n="mosques">
-      🕌 مساجد و مراکز مذهبی
-    </div>
-
-    <div class="section-subtitle">
-      🇩🇰 Denmark
-    </div>
-
-  </div>
-
-
-  <div class="mosque-card">
-
-    <div class="badge confirmed" data-i18n="documented">
-      ● مستند با سند
-    </div>
-
-    <div class="mosque-top">
-
-      <div class="mosque-photo">
-        🕌
-      </div>
-
-      <div class="mosque-main">
-
-        <div class="mosque-title" data-i18n="casePlaceholder">
-          پرونده مرکز مذهبی
-        </div>
-
-        <div class="mosque-meta" data-i18n="casePlaceholderDesc">
-          اطلاعات ثبتی، افراد، اسناد و روابط در این قسمت نمایش داده می‌شوند.
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="mosque-card">
-
-    <div class="badge review" data-i18n="underReview">
-      ● در حال بررسی
-    </div>
-
-    <div class="mosque-top">
-
-      <div class="mosque-photo">
-        🕌
-      </div>
-
-      <div class="mosque-main">
-
-        <div class="mosque-title" data-i18n="emptyCase">
-          مرکز / مسجد
-        </div>
-
-        <div class="mosque-meta" data-i18n="emptyCaseDesc">
-          داده کافی هنوز ثبت نشده است.
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
 <script>
-
-const texts = {
+const T={
 
 fa:{
-  intro:"نقشه شواهد برای درک ساختارهای مذهبی، سازمانی، رسانه‌ای و مالی مرتبط با شبکه‌های شیعه دوازده‌امامی در ایران، اروپا و جهان.",
-  visitors:"بازدید Demo",
-  understand:"فهم شبکه",
-  understandSub:"نمای کلی ساختار موضوعی تحقیق. هر رابطه باید دارای منبع و وضعیت اعتبار مشخص باشد.",
-  center:"شبکه شیعه دوازده‌امامی",
-  researchCore:"هسته تحقیق",
-  hawza:"حوزه و مرجعیت",
-  hawzaDesc:"حوزه علمیه قم، حوزه نجف، مدارس، مراجع و مراکز آموزشی.",
-  topicStructure:"ساختار موضوعی",
-  mosques:"مساجد و مراکز مذهبی",
-  mosquesDesc:"مساجد، حسینیه‌ها، مراکز فرهنگی، انجمن‌ها و مؤسسات.",
-  europeWorld:"اروپا و جهان",
-  iranInstitutions:"ایران و نهادهای حکومتی",
-  iranInstitutionsDesc:"نهادهای حکومتی، نهادهای مذهبی، سپاه پاسداران و ساختارهای مرتبط.",
-  evidenceOnly:"روابط فقط با سند",
-  media:"رسانه و ارتباطات",
-  mediaDesc:"تلویزیون، رادیو، وب‌سایت‌ها، شبکه‌های اجتماعی و کانال‌ها.",
-  mediaNetwork:"شبکه رسانه‌ای",
-  finance:"شبکه مالی و دارایی‌ها",
-  financeDesc:"منابع مالی، شرکت‌ها، املاک، کمک‌ها و انتقال‌های مستند.",
-  financialEvidence:"شواهد مالی",
-  people:"افراد و مدیران",
-  peopleDesc:"روحانیون، مدیران، اعضای هیئت‌مدیره و اشخاص مرتبط.",
-  peopleRelations:"روابط اشخاص",
-  evidence:"اسناد و شواهد",
-  evidenceDesc:"اسناد رسمی، ثبت شرکت، املاک، گزارش‌ها، ویدئو و منابع عمومی.",
-  sourceArchive:"آرشیو منابع",
-  europeGeography:"اروپا و جغرافیا",
-  europeGeographyDesc:"دانمارک، سوئد، نروژ، آلمان، فرانسه و کشورهای دیگر.",
-  openEurope:"ورود به اروپا",
-  legend:"راهنمای روابط",
-  documented:"مستند با سند",
-  structural:"رابطه ساختاری",
-  review:"در حال بررسی",
-  unverified:"ادعا / تأییدنشده",
-  timeline:"خط زمانی",
-  timelineSub:"تغییرات تاریخی شبکه‌ها، نهادها و پرونده‌ها در این قسمت دنبال می‌شود.",
-  europeTitle:"🌍 اروپا",
-  europeSub:"هر کشور از یک قالب ثابت برای مساجد، سازمان‌ها، افراد، مالی، رسانه، آموزش و اسناد استفاده می‌کند.",
-  denmark:"دانمارک",
-  sweden:"سوئد",
-  norway:"نروژ",
-  germany:"آلمان",
-  france:"فرانسه",
-  countryTemplate:"مساجد • سازمان‌ها • مالی • رسانه • اسناد",
-  activeResearch:"تحقیق فعال",
-  underReview:"در حال بررسی",
-  noData:"داده ثبت نشده",
-  countryStandard:"قالب استاندارد پرونده کشور. بخش‌های خالی بعداً با اسناد و منابع معتبر تکمیل می‌شوند.",
-  organizations:"سازمان‌ها و مؤسسات",
-  education:"حوزه و آموزش",
-  international:"ارتباطات بین‌المللی",
-  casePlaceholder:"پرونده مرکز مذهبی",
-  casePlaceholderDesc:"اطلاعات ثبتی، افراد، اسناد و روابط در این قسمت نمایش داده می‌شوند.",
-  emptyCase:"مرکز / مسجد",
-  emptyCaseDesc:"داده کافی هنوز ثبت نشده است."
+subtitle:"نقشه شواهد برای درک ساختارهای مذهبی، سازمانی، رسانه‌ای و مالی مرتبط با شبکه‌های شیعه دوازده‌امامی در ایران، اروپا و جهان.",
+visits:"بازدید Demo",
+overviewTitle:"نمای کلی ساختار شبکه",
+overviewText:"این نمودار نمای کلی ساختار و ارتباطات اصلی شبکه شیعه دوازده‌امامی را در سطح جهانی نشان می‌دهد؛ شامل حوزه و مرجعیت، مساجد، نهادهای حکومتی، رسانه، مالی، افراد، اسناد و ارتباطات بین‌المللی.",
+openMap:"مشاهده نقشه کامل ساختار شبکه",
+openMapSub:"باز کردن Mind Map بزرگ",
+hawza:"حوزه و مرجعیت",
+hawzaText:"حوزه‌ها، مراجع، مدارس دینی، مراکز آموزشی و شبکه‌های علمی.",
+mosques:"مساجد و مراکز مذهبی",
+mosquesText:"مساجد، حسینیه‌ها، مراکز فرهنگی، انجمن‌ها و مؤسسات در ایران، اروپا و جهان.",
+state:"نهادهای حکومتی",
+stateText:"نهادهای دولتی، مذهبی، نظامی و امنیتی؛ هر رابطه تنها با وضعیت سند مشخص نمایش داده می‌شود.",
+media:"رسانه و ارتباطات",
+mediaText:"رسانه‌ها، وب‌سایت‌ها، تلویزیون، رادیو، شبکه‌های اجتماعی و کانال‌ها.",
+finance:"شبکه مالی و دارایی‌ها",
+financeText:"منابع مالی، شرکت‌ها، کمک‌ها، املاک، دارایی‌ها و انتقال‌های مستند.",
+people:"افراد و مدیران",
+peopleText:"روحانیون، مدیران، اعضای هیئت‌مدیره و اشخاص کلیدی مرتبط با پرونده‌ها.",
+evidence:"اسناد و شواهد",
+evidenceText:"اسناد رسمی، ثبت شرکت، املاک، گزارش‌ها، تحقیقات، تصاویر، ویدئو و منابع عمومی.",
+world:"بین‌الملل و اروپا",
+worldText:"کشورها، سازمان‌ها، مساجد، افراد و روابط ثبت‌شده در اروپا و دیگر نقاط جهان.",
+preview:"پیش‌نمایش نقشه ساختار شبکه",
+core:"شبکه شیعه دوازده‌امامی",
+info:"برای مشاهده جزئیات هر بخش، روی کارت مربوطه کلیک کنید. رابطه مستند، رابطه ساختاری، رابطه در حال بررسی و ادعای تأییدنشده باید از یکدیگر تفکیک شوند.",
+fullMap:"نقشه کامل ساختار شبکه",
+mosquesBig:"مساجد • حسینیه‌ها • مراکز فرهنگی • انجمن‌ها • مؤسسات",
+hawzaBig:"حوزه قم • نجف • مراجع • مدارس • مراکز آموزشی و پژوهشی",
+stateBig:"نهادهای دولتی • مذهبی • نظامی • امنیتی • ساختارهای مرتبط",
+mediaBig:"تلویزیون • رادیو • سایت‌ها • شبکه‌های اجتماعی • کانال‌ها",
+evidenceBig:"اسناد رسمی • گزارش‌ها • ثبت شرکت • املاک • ویدئو • منابع عمومی",
+worldBig:"اروپا • سازمان‌های بین‌المللی • کشورهای دیگر • ارتباطات ثبت‌شده",
+peopleBig:"روحانیون • مدیران • مسئولان • اعضای هیئت‌مدیره • افراد مرتبط",
+financeBig:"منابع مالی • شرکت‌ها • املاک • کمک‌ها • انتقال‌های مستند",
+mapNote:"این نقشه ساختار تحقیق را نشان می‌دهد؛ نمایش یک گره یا خط به‌تنهایی به معنی اثبات وابستگی نیست و وضعیت هر رابطه باید جداگانه ثبت شود."
 },
 
 da:{
-  intro:"Et evidensbaseret kort over religiøse, organisatoriske, mediemæssige og finansielle netværk med fokus på tolver-shiitiske miljøer i Iran, Europa og internationalt.",
-  visitors:"Demo-besøg",
-  understand:"Forstå netværket",
-  understandSub:"Et samlet overblik over undersøgelsens struktur. Hver forbindelse skal have en kilde og en tydelig evidensstatus.",
-  center:"Tolver-shiitisk netværk",
-  researchCore:"Research-kerne",
-  hawza:"Seminarier og religiøs autoritet",
-  hawzaDesc:"Qom, Najaf, religiøse skoler, lærde og uddannelsesinstitutioner.",
-  topicStructure:"Tematisk struktur",
-  mosques:"Moskéer og religiøse centre",
-  mosquesDesc:"Moskéer, religiøse centre, kulturcentre, foreninger og institutioner.",
-  europeWorld:"Europa og verden",
-  iranInstitutions:"Iran og statslige institutioner",
-  iranInstitutionsDesc:"Statslige institutioner, religiøse institutioner, IRGC og relaterede strukturer.",
-  evidenceOnly:"Kun dokumenterede forbindelser",
-  media:"Medier og kommunikation",
-  mediaDesc:"TV, radio, websites, sociale medier og kanaler.",
-  mediaNetwork:"Medienetværk",
-  finance:"Finansielle netværk og aktiver",
-  financeDesc:"Finansiering, selskaber, ejendomme, donationer og dokumenterede overførsler.",
-  financialEvidence:"Finansiel evidens",
-  people:"Personer og ledere",
-  peopleDesc:"Religiøse ledere, bestyrelser, direktører og andre relevante personer.",
-  peopleRelations:"Personrelationer",
-  evidence:"Dokumenter og evidens",
-  evidenceDesc:"Officielle dokumenter, virksomhedsregistre, ejendom, rapporter, video og offentlige kilder.",
-  sourceArchive:"Kildearkiv",
-  europeGeography:"Europa og geografi",
-  europeGeographyDesc:"Danmark, Sverige, Norge, Tyskland, Frankrig og andre lande.",
-  openEurope:"Åbn Europa",
-  legend:"Forklaring af relationer",
-  documented:"Dokumenteret",
-  structural:"Strukturel relation",
-  review:"Under gennemgang",
-  unverified:"Påstand / ikke bekræftet",
-  timeline:"Tidslinje",
-  timelineSub:"Historiske ændringer i netværk, institutioner og sager vises her.",
-  europeTitle:"🌍 Europa",
-  europeSub:"Alle lande bruger samme researchstruktur for moskéer, organisationer, personer, økonomi, medier, uddannelse og dokumenter.",
-  denmark:"Danmark",
-  sweden:"Sverige",
-  norway:"Norge",
-  germany:"Tyskland",
-  france:"Frankrig",
-  countryTemplate:"Moskéer • organisationer • finans • medier • dokumenter",
-  activeResearch:"Aktiv research",
-  underReview:"Under gennemgang",
-  noData:"Ingen data endnu",
-  countryStandard:"Standardstruktur for landesager. Tomme felter udfyldes senere med dokumentation og kilder.",
-  organizations:"Organisationer og institutioner",
-  education:"Seminarier og uddannelse",
-  international:"Internationale forbindelser",
-  casePlaceholder:"Religiøst center — sag",
-  casePlaceholderDesc:"Registrering, personer, dokumenter og relationer vises her.",
-  emptyCase:"Center / moské",
-  emptyCaseDesc:"Der er endnu ikke registreret tilstrækkelige data."
+subtitle:"Et evidensbaseret kort over religiøse, organisatoriske, mediemæssige og finansielle strukturer relateret til tolver-shiitiske netværk i Iran, Europa og internationalt.",
+visits:"Demo-besøg",
+overviewTitle:"Samlet netværksstruktur",
+overviewText:"Diagrammet viser forskningsmodellens overordnede struktur: religiøse seminarier, moskéer, statslige institutioner, medier, økonomi, personer, dokumentation og internationale forbindelser.",
+openMap:"Se det komplette netværkskort",
+openMapSub:"Åbn stort Mind Map",
+hawza:"Seminarier og religiøs autoritet",
+hawzaText:"Religiøse seminarier, lærde, skoler, uddannelses- og forskningscentre.",
+mosques:"Moskéer og religiøse centre",
+mosquesText:"Moskéer, religiøse centre, kulturcentre, foreninger og institutioner i Europa og internationalt.",
+state:"Statslige institutioner",
+stateText:"Statslige, religiøse, militære og sikkerhedsrelaterede institutioner; forbindelser registreres med evidensstatus.",
+media:"Medier og kommunikation",
+mediaText:"TV, radio, websites, sociale medier og kommunikationskanaler.",
+finance:"Finansielle netværk og aktiver",
+financeText:"Finansiering, selskaber, donationer, ejendomme, aktiver og dokumenterede overførsler.",
+people:"Personer og ledere",
+peopleText:"Religiøse ledere, direktører, bestyrelsesmedlemmer og andre relevante personer.",
+evidence:"Dokumenter og evidens",
+evidenceText:"Officielle dokumenter, selskabsregistre, ejendom, rapporter, research, billeder, video og offentlige kilder.",
+world:"Internationalt og Europa",
+worldText:"Lande, organisationer, moskéer, personer og registrerede relationer i Europa og andre regioner.",
+preview:"Forhåndsvisning af netværkskort",
+core:"Tolver-shiitisk netværk",
+info:"Klik på et område for detaljer. Dokumenterede, strukturelle, undersøgte og ubekræftede relationer skal holdes tydeligt adskilt.",
+fullMap:"Komplet netværkskort",
+mosquesBig:"Moskéer • religiøse centre • kulturcentre • foreninger • institutioner",
+hawzaBig:"Qom • Najaf • lærde • skoler • uddannelses- og forskningscentre",
+stateBig:"Statslige • religiøse • militære • sikkerhedsrelaterede strukturer",
+mediaBig:"TV • radio • websites • sociale medier • kanaler",
+evidenceBig:"Officielle dokumenter • rapporter • selskaber • ejendom • video • offentlige kilder",
+worldBig:"Europa • internationale organisationer • andre lande • registrerede relationer",
+peopleBig:"Religiøse ledere • direktører • ansvarlige • bestyrelser • relevante personer",
+financeBig:"Finansiering • selskaber • ejendom • donationer • dokumenterede overførsler",
+mapNote:"Kortet viser forskningsstrukturen. En linje eller node er ikke i sig selv dokumentation for tilknytning; hver relation skal have sin egen evidensstatus."
 },
 
 en:{
-  intro:"An evidence-based map for understanding religious, organizational, media and financial structures related to Twelver Shia networks in Iran, Europe and internationally.",
-  visitors:"Demo visits",
-  understand:"Understanding the network",
-  understandSub:"A high-level view of the research structure. Every relationship should have a source and a clear evidence status.",
-  center:"Twelver Shia network",
-  researchCore:"Research core",
-  hawza:"Seminaries and religious authority",
-  hawzaDesc:"Qom, Najaf, religious schools, scholars and educational institutions.",
-  topicStructure:"Topic structure",
-  mosques:"Mosques and religious centres",
-  mosquesDesc:"Mosques, religious centres, cultural centres, associations and institutions.",
-  europeWorld:"Europe and world",
-  iranInstitutions:"Iran and state institutions",
-  iranInstitutionsDesc:"State institutions, religious institutions, the IRGC and related structures.",
-  evidenceOnly:"Evidence-based links only",
-  media:"Media and communications",
-  mediaDesc:"Television, radio, websites, social media and channels.",
-  mediaNetwork:"Media network",
-  finance:"Financial networks and assets",
-  financeDesc:"Funding, companies, properties, donations and documented transfers.",
-  financialEvidence:"Financial evidence",
-  people:"People and leadership",
-  peopleDesc:"Clergy, directors, board members and other relevant people.",
-  peopleRelations:"People relationships",
-  evidence:"Documents and evidence",
-  evidenceDesc:"Official records, company registries, property records, reports, video and public sources.",
-  sourceArchive:"Source archive",
-  europeGeography:"Europe and geography",
-  europeGeographyDesc:"Denmark, Sweden, Norway, Germany, France and other countries.",
-  openEurope:"Open Europe",
-  legend:"Relationship legend",
-  documented:"Documented",
-  structural:"Structural relationship",
-  review:"Under review",
-  unverified:"Claim / unverified",
-  timeline:"Timeline",
-  timelineSub:"Historical changes in networks, institutions and cases are tracked here.",
-  europeTitle:"🌍 Europe",
-  europeSub:"Every country uses the same research template for mosques, organizations, people, finance, media, education and documents.",
-  denmark:"Denmark",
-  sweden:"Sweden",
-  norway:"Norway",
-  germany:"Germany",
-  france:"France",
-  countryTemplate:"Mosques • organizations • finance • media • documents",
-  activeResearch:"Active research",
-  underReview:"Under review",
-  noData:"No data recorded",
-  countryStandard:"Standard country-case template. Empty sections will later be completed with evidence and sources.",
-  organizations:"Organizations and institutions",
-  education:"Seminaries and education",
-  international:"International relationships",
-  casePlaceholder:"Religious centre case",
-  casePlaceholderDesc:"Registration, people, documents and relationships will appear here.",
-  emptyCase:"Centre / mosque",
-  emptyCaseDesc:"Insufficient data has been recorded."
+subtitle:"An evidence-based map for understanding religious, organizational, media and financial structures related to Twelver Shia networks in Iran, Europe and internationally.",
+visits:"Demo visits",
+overviewTitle:"Overall network structure",
+overviewText:"This diagram presents the research framework at a global level, covering religious authority, mosques, state institutions, media, finance, people, evidence and international connections.",
+openMap:"View complete network map",
+openMapSub:"Open large Mind Map",
+hawza:"Seminaries and religious authority",
+hawzaText:"Seminaries, scholars, religious schools, educational institutions and research centres.",
+mosques:"Mosques and religious centres",
+mosquesText:"Mosques, religious centres, cultural centres, associations and institutions in Europe and internationally.",
+state:"State institutions",
+stateText:"State, religious, military and security-related institutions; relationships are displayed with an evidence status.",
+media:"Media and communications",
+mediaText:"Television, radio, websites, social media and communication channels.",
+finance:"Financial networks and assets",
+financeText:"Funding, companies, donations, property, assets and documented transfers.",
+people:"People and leadership",
+peopleText:"Clergy, directors, board members and other relevant people connected to research cases.",
+evidence:"Documents and evidence",
+evidenceText:"Official records, company registries, property records, reports, research, images, video and public sources.",
+world:"International and Europe",
+worldText:"Countries, organizations, mosques, people and documented relationships across Europe and other regions.",
+preview:"Network structure preview",
+core:"Twelver Shia network",
+info:"Select a section to explore details. Documented, structural, under-review and unverified relationships should be clearly distinguished.",
+fullMap:"Complete network structure",
+mosquesBig:"Mosques • religious centres • cultural centres • associations • institutions",
+hawzaBig:"Qom • Najaf • scholars • schools • educational and research centres",
+stateBig:"State • religious • military • security-related structures",
+mediaBig:"TV • radio • websites • social media • channels",
+evidenceBig:"Official records • reports • company registries • property • video • public sources",
+worldBig:"Europe • international organizations • other countries • recorded connections",
+peopleBig:"Clergy • directors • officials • boards • relevant people",
+financeBig:"Funding • companies • property • donations • documented transfers",
+mapNote:"This map represents the research structure. A node or connection does not by itself establish affiliation; each relationship must carry its own evidence status."
 }
 
 };
 
-let currentLanguage="fa";
+function setLanguage(lang,btn){
 
-function setLanguage(lang,button){
+  document.querySelectorAll(".lang")
+    .forEach(x=>x.classList.remove("active"));
 
-  currentLanguage=lang;
-
-  document
-  .querySelectorAll(".lang-btn")
-  .forEach(b=>b.classList.remove("active"));
-
-  button.classList.add("active");
+  btn.classList.add("active");
 
   document.documentElement.lang=lang;
+  document.documentElement.dir=lang==="fa" ? "rtl" : "ltr";
 
-  document.documentElement.dir=
-    lang==="fa"
-    ? "rtl"
-    : "ltr";
-
-  document
-  .querySelectorAll("[data-i18n]")
-  .forEach(el=>{
-
-    const key=el.dataset.i18n;
-
-    if(texts[lang][key]){
-      el.textContent=texts[lang][key];
+  document.querySelectorAll("[data-t]").forEach(el=>{
+    const key=el.dataset.t;
+    if(T[lang] && T[lang][key]){
+      el.textContent=T[lang][key];
     }
-
   });
-
 }
 
-
-function showPage(id){
-
-  document
-  .querySelectorAll(".page")
-  .forEach(p=>p.classList.remove("active"));
-
-  const target=
-  document.getElementById(id);
-
-  if(target){
-    target.classList.add("active");
-  }
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+function openMap(){
+  document.getElementById("mapModal").classList.add("show");
+  document.body.style.overflow="hidden";
 }
 
+function closeMap(){
+  document.getElementById("mapModal").classList.remove("show");
+  document.body.style.overflow="";
+}
+
+function goHome(){
+  closeMap();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ESC for desktop */
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape") closeMap();
+});
 </script>
 
 </body>
